@@ -18,6 +18,7 @@ function init() {
   const ursulaClass = 'ursula'
   const shellClass = 'shell'
   const wallClass = 'wall'
+  
 
   //* Variables
 
@@ -97,6 +98,8 @@ function init() {
 
   //* Move Ariel Around the Board
 
+  
+
   function handleKeyUp(event) {
     removeAriel(arielPosition)
 
@@ -109,16 +112,20 @@ function init() {
 
     switch (event.keyCode) {
       case 39: // right
-        if ( horizontal < width - 2) arielPosition++
-        break
+        if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
+        else if (horizontal < width - 2) arielPosition++ 
+        break 
       case 37: // left
-        if (horizontal > 1) arielPosition-- 
+        if (cells[arielPosition - 1].classList.contains(wallClass)) arielPosition += 0
+        else if (horizontal > 1) arielPosition-- 
         break
       case 38: //up
-        if (vertical > 1) arielPosition -= width
+        if (cells[arielPosition - width].classList.contains(wallClass)) arielPosition += 0
+        else if (vertical > 1) arielPosition -= width
         break
       case 40: //down
-        if (vertical < width - 2) arielPosition += width
+        if (cells[arielPosition + width].classList.contains(wallClass)) arielPosition += 0
+        else if (vertical < width - 2) arielPosition += width
         break
       default:
         console.log('Invalid Key') //* remove for prompt window 
@@ -138,7 +145,7 @@ function init() {
       addUrsula(ursulaPosition)
     }, 800)
   }
-  moveUrsula()
+  // moveUrsula()
 
 
 
