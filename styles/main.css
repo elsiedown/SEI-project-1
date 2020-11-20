@@ -1,3 +1,71 @@
-body {
-  background-color: pink;
+* {
+  box-sizing: border-box;
 }
+
+body {
+  background-color: white;
+  height: 100vh;
+  margin: 0
+} 
+
+.grid-wrapper {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center; 
+  background-image: url('../assets/underwater.jpeg');
+  background-position: center;
+  background-size: cover;
+
+}
+
+
+.grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+  background-color: white;
+}
+
+.grid div {
+  border: 0.5px solid grey;
+  flex-grow: 1;
+  height: 10%;
+  width: 10%;
+  /* background-image: url('../assets/shell.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center; */
+}
+
+.grid div.ariel {
+  background-image: url('../assets/ariel.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: none;
+}
+
+.grid div.shell {
+  background-image: url('../assets/shell.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+}
+
+.grid div.ursula {
+  background-image: url('../assets/ursula.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: none;
+}
+
+.grid div.wall {
+  background-color: lightblue;
+  background-image: none;
+}
+
