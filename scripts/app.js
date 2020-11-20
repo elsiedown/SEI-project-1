@@ -13,6 +13,9 @@ function init() {
   //* Elements
 
   const grid = document.querySelector('.grid')
+  const scoreDisplay = document.querySelector('#score-text')
+
+  
 
   const arielClass = 'ariel'
   const ursulaClass = 'ursula'
@@ -28,6 +31,7 @@ function init() {
   const wallCells = []
     
   let timer = 0 
+  let score = 0 
   let arielPosition = 55
   let ursulaPosition = 11
 
@@ -42,9 +46,11 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
       cell.classList.add(shellClass)
+
     }
     addUrsula(ursulaPosition)
     addAriel(position)
+    addWallCells()
   }
 
   createGrid(arielPosition)
@@ -58,24 +64,26 @@ function init() {
         wallCells.push(cells[i])
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
+          wallCell.classList.remove(shellClass)
         })
       }
     }
   }
-  addWallCells()
+  
   
 
   //* Remove Shell
 
   function removeShell(position) {
-    if (cells[position].classList.contains(shellClass))  {
+    updateScore()
+    if (hasShell(position))  {
       cells[position].classList.remove(shellClass)
     } 
   }
 
   function addAriel(position) {
     removeShell(arielPosition)
-    return cells[position].classList.add(arielClass)
+    cells[position].classList.add(arielClass)  
   }
 
   //* Remove Ariel from Grid 
@@ -96,9 +104,22 @@ function init() {
     cells[position].classList.remove(ursulaClass)
   }
 
-  //* Move Ariel Around the Board
+  //* has shell function
 
-  
+  function hasShell(position) {
+    return cells[position].classList.contains(shellClass)
+  }
+
+  //* Function for score:
+
+  function updateScore() {
+    if (hasShell(arielPosition)) {
+      score += 50
+    }
+    scoreDisplay.innerHTML = score
+  }
+
+  //* Move Ariel Around the Board
 
   function handleKeyUp(event) {
     removeAriel(arielPosition)
@@ -108,7 +129,6 @@ function init() {
     const vertical = Math.floor(arielPosition / width)
     
     // create a condition / varaible which checks if shes on a wall - and if so cant move into it 
-  
 
     switch (event.keyCode) {
       case 39: // right
@@ -145,12 +165,11 @@ function init() {
       addUrsula(ursulaPosition)
     }, 800)
   }
-  // moveUrsula()
+  
 
-
-
-
-  //* Function for Winner - if no cells with shells left 
+  //* Function for Winner - if no cells with shells left
+  
+  
 
   
 
