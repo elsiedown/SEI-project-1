@@ -57,6 +57,13 @@ body {
   background-position: center;
 }
 
+.grid div.starfish {
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  background-image: url('../assets/starfish.png')
+}
+
 .grid div.ursula {
   background-image: url('../assets/ursula.png');
   background-repeat: no-repeat;
@@ -67,5 +74,11 @@ body {
 .grid div.wall {
   background-color: lightblue;
   background-image: none;
+}
+
+.grid div.whirlpool {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url('../assets/water-portal.png')
 }
 

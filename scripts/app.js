@@ -14,6 +14,8 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const scoreDisplay = document.querySelector('#score-text')
+  const audio = document.querySelector('#audio')
+  const playMusicButton = document.querySelector('.music-button')
 
   
 
@@ -21,6 +23,8 @@ function init() {
   const ursulaClass = 'ursula'
   const shellClass = 'shell'
   const wallClass = 'wall'
+  const starfishClass = 'starfish'
+  const whirlpoolClass = 'whirlpool'
   
 
   //* Variables
@@ -29,11 +33,14 @@ function init() {
   const gridCellCount = width * width
   const cells = []
   const wallCells = []
+  const starfishes = []
+  const whirlpools = []
     
   let timer = 0 
   let score = 0 
   let arielPosition = 55
   let ursulaPosition = 54
+  const trapdoorPosition = 12
 
   //* Functions
 
@@ -42,7 +49,7 @@ function init() {
   function createGrid(position) {
     for (let i = 0; i < gridCellCount; i++) {
       const cell = document.createElement('div')
-      // cell.innerHTML = i
+      cell.innerHTML = i
       grid.appendChild(cell)
       cells.push(cell)
       cell.classList.add(shellClass)
@@ -51,11 +58,13 @@ function init() {
     addUrsula(ursulaPosition)
     addAriel(position)
     addWallCells()
+    addStarfish()
+    addWhirlpool()
   }
 
   createGrid(arielPosition)
 
-  //* Add Walls
+  //* Add Walls, Starfish and Whirpools
 
   function addWallCells() {
     for (let i = 0; i < cells.length; i++) {
@@ -69,20 +78,52 @@ function init() {
       }
     }
   }
+
+  function addStarfish() {
+    for (let i = 0; i < cells.length; i++) {
+      if ((i === 15) || (i === 58 ) || (i  === 85 ) || (i  === 51 )){
+        starfishes.push(cells[i])
+        starfishes.forEach(starfish=> {
+          starfish.classList.add(starfishClass)
+          starfish.classList.remove(shellClass)
+        })
+      }
+    }
+  }
+
+  function addWhirlpool() {
+    for (let i = 0; i < cells.length; i++) {
+      if ((i === 11) || (i === 88 )){
+        whirlpools.push(cells[i])
+        whirlpools.forEach(whirlpool=> {
+          whirlpool.classList.add(whirlpoolClass)
+          whirlpool.classList.remove(shellClass)
+        })
+      }
+    }
+  }
+
+
+  
   
   
 
   //* Remove Shell
 
-  function removeShell(position) {
+  function removeItem(position) {
     updateScore()
     if (hasShell(position))  {
       cells[position].classList.remove(shellClass)
-    } 
+    }
+    if (hasStarfish(position))  {
+      cells[position].classList.remove(starfishClass)
+    }  
   }
 
+  //* Add Ariel
+
   function addAriel(position) {
-    removeShell(arielPosition)
+    removeItem(arielPosition)
     cells[position].classList.add(arielClass)  
   }
 
@@ -110,11 +151,17 @@ function init() {
     return cells[position].classList.contains(shellClass)
   }
 
+  function hasStarfish(position) {
+    return cells[position].classList.contains(starfishClass)
+  }
+
   //* Function for score:
 
   function updateScore() {
     if (hasShell(arielPosition)) {
       score += 50
+    } if (hasStarfish(arielPosition)) {
+      score += 100
     }
     scoreDisplay.innerHTML = score
   }
@@ -128,22 +175,25 @@ function init() {
     const horizontal = arielPosition % width 
     const vertical = Math.floor(arielPosition / width)
     
-    // create a condition / varaible which checks if shes on a wall - and if so cant move into it 
 
     switch (event.keyCode) {
       case 39: // right
-        if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 12
+        else if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
         else if (horizontal < width - 2) arielPosition++ 
         break 
       case 37: // left
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 87
         if (cells[arielPosition - 1].classList.contains(wallClass)) arielPosition += 0
         else if (horizontal > 1) arielPosition-- 
         break
       case 38: //up
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 87
         if (cells[arielPosition - width].classList.contains(wallClass)) arielPosition += 0
         else if (vertical > 1) arielPosition -= width
         break
       case 40: //down
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 12
         if (cells[arielPosition + width].classList.contains(wallClass)) arielPosition += 0
         else if (vertical < width - 2) arielPosition += width
         break
@@ -153,14 +203,29 @@ function init() {
     addAriel(arielPosition)
   }
 
+  // function trapdoor() {
+  //   if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 11 {
+  //     arielPosition = 11
+  //   }
+  //   addAriel(arielPosition)
+  // }
+
+  // trapdoor()
+
+
+
+
+
+
+
   //* Move Ursula Around the Board 
   //* every second or less - move ursula - set an interval 
   // from her position to the left / right
   // make sure she stays on the board 
 
-  // const ursulaHorizontal = ursulaPosition % width 
-  // const ursulaVertical = Math.floor(ursulaPosition / width)
-  // const ursulaArray = []
+  const ursulaHorizontal = ursulaPosition % width 
+  const ursulaVertical = Math.floor(ursulaPosition / width)
+  const ursulaArray = ['right', 'left', 'up', 'down']
 
   // const moveRight = ursulaPosition++
   // const moveLeft = ursulaPosition--
@@ -172,21 +237,73 @@ function init() {
   // ursulaArray.push(moveDown)
   // ursulaArray.push(moveUp)
 
-  // const randomIndex = Math.floor(Math.random() * ursulaArray.length)
+  const randomUrsulaIndex = Math.floor(Math.random() * ursulaArray.length)
     
-    
+  // if hits walls then skip
+  // if 
 
   function moveUrsula () {
     timer = setInterval(() => {
       removeUrsula(ursulaPosition)
-      ursulaPosition++
+      if (cells[ursulaPosition + 1].classList.contains(wallClass)) { 
+        ursulaPosition -= width
+      } else  if (cells[ursulaPosition - width].classList.contains(wallClass)) { 
+        ursulaPosition--
+      } else  if (cells[ursulaPosition - 1].classList.contains(wallClass)) { 
+        ursulaPosition += width
+      }  else  if (cells[ursulaPosition + width].classList.contains(wallClass)) { 
+        ursulaPosition++
+
+
+      } else if (ursulaHorizontal < width - 2) {
+        ursulaPosition++ 
+      }  else if (ursulaHorizontal > 1)  {
+        ursulaPosition--
+      } else if (ursulaVertical > 1) {
+        ursulaPosition -= width
+      } else if (ursulaVertical < width - 2) {
+        ursulaPosition += width
+
+
+      } else if (ursulaArray[randomUrsulaIndex] === 'right') {
+        ursulaPosition++
+      } else if (ursulaArray[randomUrsulaIndex] === 'left') {
+        ursulaPosition--
+      } else if (ursulaArray[randomUrsulaIndex] === 'up') {
+        ursulaPosition -= width 
+      } else if (ursulaArray[randomUrsulaIndex] === 'down') {
+        ursulaPosition += width 
+      }
       addUrsula(ursulaPosition)
     }, 500)
   }
 
-  moveUrsula()
+  // moveUrsula()
+
+  console.log(ursulaPosition)
+
+
+
+
+
+
 
   //* Function for Winner - if no cells with shells left
+
+  function winner() {
+    if (score === 200) {
+      scoreDisplay.innerHTML = 'game over'
+    }
+  }
+
+  winner()
+
+  //* Play Music 
+
+  function handlePlaySound() {
+    audio.src = './assets/Under the Sea.mp3'
+    audio.play()
+  }
   
   
 
@@ -195,6 +312,7 @@ function init() {
   //* Event Listeners
 
   document.addEventListener('keyup', handleKeyUp)
+  playMusicButton.addEventListener('click', handlePlaySound)
 
 }
 
