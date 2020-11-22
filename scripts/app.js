@@ -33,7 +33,7 @@ function init() {
   let timer = 0 
   let score = 0 
   let arielPosition = 55
-  let ursulaPosition = 11
+  let ursulaPosition = 54
 
   //* Functions
 
@@ -158,14 +158,33 @@ function init() {
   // from her position to the left / right
   // make sure she stays on the board 
 
+  // const ursulaHorizontal = ursulaPosition % width 
+  // const ursulaVertical = Math.floor(ursulaPosition / width)
+  // const ursulaArray = []
+
+  // const moveRight = ursulaPosition++
+  // const moveLeft = ursulaPosition--
+  // const moveUp = ursulaPosition += width 
+  // const moveDown = ursulaPosition += width 
+
+  // ursulaArray.push(moveRight)
+  // ursulaArray.push(moveLeft)
+  // ursulaArray.push(moveDown)
+  // ursulaArray.push(moveUp)
+
+  // const randomIndex = Math.floor(Math.random() * ursulaArray.length)
+    
+    
+
   function moveUrsula () {
     timer = setInterval(() => {
       removeUrsula(ursulaPosition)
       ursulaPosition++
       addUrsula(ursulaPosition)
-    }, 800)
+    }, 500)
   }
-  
+
+  moveUrsula()
 
   //* Function for Winner - if no cells with shells left
   
