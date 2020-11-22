@@ -46,7 +46,7 @@ function init() {
   let timer = 0 
   let score = 0 
   let lives = 3
-  let arielPosition = 21
+  let arielPosition = 84
   let ursulaPosition = 22
 
   //* Functions
@@ -56,7 +56,7 @@ function init() {
   function createGrid(position) {
     for (let i = 0; i < gridCellCount; i++) {
       const cell = document.createElement('div')
-      cell.innerHTML = i
+      // cell.innerHTML = i
       grid.appendChild(cell)
       cells.push(cell)
       // cell.classList.add(shellClass)
@@ -158,25 +158,25 @@ function init() {
     const horizontal = arielPosition % width 
     const vertical = Math.floor(arielPosition / width)
     
-
+    
     switch (event.keyCode) {
-      case 39: // right
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 14
+      case 39: // right 
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 15
         else if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
         else if (horizontal < width - 2) arielPosition++ 
         break 
       case 37: // left
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 129
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 153
         if (cells[arielPosition - 1].classList.contains(wallClass)) arielPosition += 0
         else if (horizontal > 1) arielPosition-- 
         break
       case 38: //up
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 129
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 153
         if (cells[arielPosition - width].classList.contains(wallClass)) arielPosition += 0
         else if (vertical > 1) arielPosition -= width
         break
       case 40: //down
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 14
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 15
         if (cells[arielPosition + width].classList.contains(wallClass)) arielPosition += 0
         else if (vertical < width - 2) arielPosition += width
         break
@@ -207,7 +207,7 @@ function init() {
   // ursulaArray.push(moveDown)
   // ursulaArray.push(moveUp)
 
-  const randomUrsulaIndex = Math.floor(Math.random() * ursulaArray.length)
+  const randomUrsulaIndex = Math.floor(Math.random() * cells.length)
     
   // if hits walls then skip
   // if 
@@ -215,40 +215,12 @@ function init() {
   function moveUrsula () {
     timer = setInterval(() => {
       removeUrsula(ursulaPosition)
-      if (cells[ursulaPosition + 1].classList.contains(wallClass)) { 
-        ursulaPosition -= width
-      } else  if (cells[ursulaPosition - width].classList.contains(wallClass)) { 
-        ursulaPosition--
-      } else  if (cells[ursulaPosition - 1].classList.contains(wallClass)) { 
-        ursulaPosition += width
-      }  else  if (cells[ursulaPosition + width].classList.contains(wallClass)) { 
-        ursulaPosition++
-
-
-      } else if (ursulaHorizontal < width - 2) {
-        ursulaPosition++ 
-      }  else if (ursulaHorizontal > 1)  {
-        ursulaPosition--
-      } else if (ursulaVertical > 1) {
-        ursulaPosition -= width
-      } else if (ursulaVertical < width - 2) {
-        ursulaPosition += width
-
-
-      } else if (ursulaArray[randomUrsulaIndex] === 'right') {
-        ursulaPosition++
-      } else if (ursulaArray[randomUrsulaIndex] === 'left') {
-        ursulaPosition--
-      } else if (ursulaArray[randomUrsulaIndex] === 'up') {
-        ursulaPosition -= width 
-      } else if (ursulaArray[randomUrsulaIndex] === 'down') {
-        ursulaPosition += width 
-      }
+      ursulaPosition++
       addUrsula(ursulaPosition)
     }, 500)
   }
 
-  // moveUrsula()
+  moveUrsula()
 
   console.log(ursulaPosition)
 
@@ -289,22 +261,39 @@ function init() {
   }
 
 
-  //* Ariel Meets Ursula
+  //* Ariel caught by Ursula + loose a life function
 
   function arielCaught() {
-    if (cells[arielPosition + 1].classList.contains(ursulaClass)) {
-      console.log('help')
-    }
+    timer = setInterval(() => {
+      if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
+         (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
+         (cells[arielPosition + width].classList.contains(ursulaClass)) ||
+         (cells[arielPosition - width].classList.contains(ursulaClass))) {
+        lives = lives - 1
+        clearInterval()
+        livesLeft.innerHTML = lives
+      } 
+    }, 500)
   }
 
   arielCaught()
+
+
+  function handleKeyDown(event) {
+    if (event.which === 38 || event.which === 40) {
+      event.preventDefault()
+    }
+
+  }
   
 
   //* Event Listeners
 
   document.addEventListener('keyup', handleKeyUp)
+  document.addEventListener('keydown', handleKeyDown)
   playMusicButton.addEventListener('click', handlePlaySound)
   resetButton.addEventListener('click', handleReset)
+  
 
 }
 
