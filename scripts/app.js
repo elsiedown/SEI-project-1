@@ -196,9 +196,9 @@ function init() {
   // from her position to the left / right
   // make sure she stays on the board 
 
-  const ursulaHorizontal = ursulaPosition % width 
-  const ursulaVertical = Math.floor(ursulaPosition / width)
-  const ursulaArray = ['right', 'left', 'up', 'down']
+  // const ursulaHorizontal = ursulaPosition % width 
+  // const ursulaVertical = Math.floor(ursulaPosition / width)
+  // const ursulaArray = ['right', 'left', 'up', 'down']
 
   // const moveRight = ursulaPosition++
   // const moveLeft = ursulaPosition--
@@ -210,16 +210,22 @@ function init() {
   // ursulaArray.push(moveDown)
   // ursulaArray.push(moveUp)
 
-  const randomUrsulaIndex = Math.floor(Math.random() * cells.length)
+  const randomIndex = Math.floor(Math.random() * cells.length)
     
   // if hits walls then skip
   // if 
 
   function moveUrsula () {
     timer = setInterval(() => {
-      removeUrsula(ursulaPosition)
-      ursulaPosition++
-      addUrsula(ursulaPosition)
+      if (cells[ursulaPosition + 1].classList.contains(wallClass)) {
+        removeUrsula(ursulaPosition)
+        ursulaPosition + width
+        addUrsula(ursulaPosition)
+      } else { 
+        removeUrsula(ursulaPosition)
+        ursulaPosition++
+        addUrsula(ursulaPosition)
+      }
     }, 500)
   }
 
