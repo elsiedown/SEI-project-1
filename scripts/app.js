@@ -16,6 +16,8 @@ function init() {
   const scoreDisplay = document.querySelector('#score-text')
   const audio = document.querySelector('#audio')
   const playMusicButton = document.querySelector('.music-button')
+  const resetButton = document.querySelector('.reset-button')
+  const startButton = document.querySelector('.start-button')
 
   
 
@@ -53,13 +55,13 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
       cell.classList.add(shellClass)
-
     }
     addUrsula(ursulaPosition)
     addAriel(position)
     addWallCells()
     addStarfish()
     addWhirlpool()
+    scoreDisplay.innerHTML = 0
   }
 
   createGrid(arielPosition)
@@ -305,6 +307,11 @@ function init() {
     audio.play()
   }
   
+  //* Reset Game
+
+  function handleReset() {
+    window.location.reload()
+  }
   
 
   
@@ -313,6 +320,7 @@ function init() {
 
   document.addEventListener('keyup', handleKeyUp)
   playMusicButton.addEventListener('click', handlePlaySound)
+  resetButton.addEventListener('click', handleReset)
 
 }
 
