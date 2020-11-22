@@ -3,17 +3,19 @@
 }
 
 body {
-  max-height: 100vh;
+  height: 100%;
   margin: 0;
   background-image: url('../assets/underwater.jpeg');
   background-position: center;
   background-size: cover;
   text-align: center;
+  color: black;
 } 
 
 h1 { 
   color: white;
-  font-size: 60px;
+  font-size: 80px;
+  font-family: 'Indie Flower', cursive;
 }
 
 .main-wrapper {
@@ -26,6 +28,7 @@ h1 {
 main {
   flex-grow: 1;
   display: flex;
+  margin-top: 0;
 }
 
 .left-side {
@@ -34,6 +37,11 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url('../assets/scroll.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: none;
 }
 
 button {
@@ -63,18 +71,18 @@ button {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
+  /* height: 100%; */
   justify-content: center;
-  height: 600px;
-  width: 600px;
+  height: 728px;
+  width: 728px;
   background-color: white;
 }
 
 .grid div {
   border: 0.5px solid grey;
   flex-grow: 1;
-  height: 10%;
-  width: 10%;
+  height: 56px;
+  width: 56px;
   /* background-image: url('../assets/shell.png');
   background-repeat: no-repeat;
   background-size: 50%;

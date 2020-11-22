@@ -14,6 +14,7 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const scoreDisplay = document.querySelector('#score-text')
+  const livesLeft = document.querySelector('#lives-left')
   const audio = document.querySelector('#audio')
   const playMusicButton = document.querySelector('.music-button')
   const resetButton = document.querySelector('.reset-button')
@@ -31,18 +32,22 @@ function init() {
 
   //* Variables
 
-  const width = 10
+  const width = 13
   const gridCellCount = width * width
   const cells = []
   const wallCells = []
   const starfishes = []
   const whirlpools = []
+  const shells = []
+
+  const wallLayout = [28, 29, 30, 31, ,33, 34, 35, 36]
+
     
   let timer = 0 
   let score = 0 
-  let arielPosition = 55
-  let ursulaPosition = 54
-  const trapdoorPosition = 12
+  let lives = 3
+  let arielPosition = 21
+  let ursulaPosition = 22
 
   //* Functions
 
@@ -54,13 +59,11 @@ function init() {
       cell.innerHTML = i
       grid.appendChild(cell)
       cells.push(cell)
-      cell.classList.add(shellClass)
+      // cell.classList.add(shellClass)
     }
     addUrsula(ursulaPosition)
+    addToGrid()
     addAriel(position)
-    addWallCells()
-    addStarfish()
-    addWhirlpool()
     scoreDisplay.innerHTML = 0
   }
 
@@ -68,49 +71,37 @@ function init() {
 
   //* Add Walls, Starfish and Whirpools
 
-  function addWallCells() {
+  function addToGrid() {
     for (let i = 0; i < cells.length; i++) {
-      if ((i < 9 || i > 90) || (i % 10 === 0) || (i % 10 === 9 ) || (i > 31 && i < 34 ) 
-      || (i > 35 && i < 38 ) || (i > 61 && i < 64 ) || (i > 65 && i < 68 )) {
+      if ((i < 13 || i > 155) || (i % 13 === 0) || (i % 13 === 12) || (i > 27 && i < 32 ) 
+        || (i > 32 && i < 37 ) | (i > 131  && i < 136 ) || (i > 136 && i < 141 )
+        || (i === 41 || i === 41 || i === 54 || i === 67)  || (i === 93 || i === 106 || i === 119 || i === 49 )
+        || (i === 49 || i === 62 || i === 75 || i === 49 ) || (i === 101 || i === 114 || i === 127 )
+        || (i === 83 || i === 96 || i === 97 || i === 98 || i === 85 )) {
         wallCells.push(cells[i])
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
-          wallCell.classList.remove(shellClass)
         })
-      }
-    }
-  }
-
-  function addStarfish() {
-    for (let i = 0; i < cells.length; i++) {
-      if ((i === 15) || (i === 58 ) || (i  === 85 ) || (i  === 51 )){
+      } else if ((i === 19) || (i === 79 ) || (i  === 89 ) || (i  === 149 ) ){
         starfishes.push(cells[i])
         starfishes.forEach(starfish=> {
           starfish.classList.add(starfishClass)
-          starfish.classList.remove(shellClass)
         })
-      }
-    }
-  }
-
-  function addWhirlpool() {
-    for (let i = 0; i < cells.length; i++) {
-      if ((i === 11) || (i === 88 )){
+      } else if ((i === 14) || (i === 154 )){
         whirlpools.push(cells[i])
         whirlpools.forEach(whirlpool=> {
           whirlpool.classList.add(whirlpoolClass)
-          whirlpool.classList.remove(shellClass)
+        })
+      } else {
+        shells.push(cells[i])
+        shells.forEach(shell=> {
+          shell.classList.add(shellClass)
         })
       }
     }
   }
 
-
-  
-  
-  
-
-  //* Remove Shell
+  //* Remove Item
 
   function removeItem(position) {
     updateScore()
@@ -120,6 +111,16 @@ function init() {
     if (hasStarfish(position))  {
       cells[position].classList.remove(starfishClass)
     }  
+  }
+
+  //* Has shell or starfish function
+
+  function hasShell(position) {
+    return cells[position].classList.contains(shellClass)
+  }
+
+  function hasStarfish(position) {
+    return cells[position].classList.contains(starfishClass)
   }
 
   //* Add Ariel
@@ -147,26 +148,6 @@ function init() {
     cells[position].classList.remove(ursulaClass)
   }
 
-  //* has shell function
-
-  function hasShell(position) {
-    return cells[position].classList.contains(shellClass)
-  }
-
-  function hasStarfish(position) {
-    return cells[position].classList.contains(starfishClass)
-  }
-
-  //* Function for score:
-
-  function updateScore() {
-    if (hasShell(arielPosition)) {
-      score += 50
-    } if (hasStarfish(arielPosition)) {
-      score += 100
-    }
-    scoreDisplay.innerHTML = score
-  }
 
   //* Move Ariel Around the Board
 
@@ -180,22 +161,22 @@ function init() {
 
     switch (event.keyCode) {
       case 39: // right
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 12
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 14
         else if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
         else if (horizontal < width - 2) arielPosition++ 
         break 
       case 37: // left
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 87
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 129
         if (cells[arielPosition - 1].classList.contains(wallClass)) arielPosition += 0
         else if (horizontal > 1) arielPosition-- 
         break
       case 38: //up
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 87
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 129
         if (cells[arielPosition - width].classList.contains(wallClass)) arielPosition += 0
         else if (vertical > 1) arielPosition -= width
         break
       case 40: //down
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 12
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 14
         if (cells[arielPosition + width].classList.contains(wallClass)) arielPosition += 0
         else if (vertical < width - 2) arielPosition += width
         break
@@ -205,20 +186,7 @@ function init() {
     addAriel(arielPosition)
   }
 
-  // function trapdoor() {
-  //   if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 11 {
-  //     arielPosition = 11
-  //   }
-  //   addAriel(arielPosition)
-  // }
-
-  // trapdoor()
-
-
-
-
-
-
+ 
 
   //* Move Ursula Around the Board 
   //* every second or less - move ursula - set an interval 
@@ -286,18 +254,25 @@ function init() {
 
 
 
+  //* Function for score:
 
-
-
-
-  //* Function for Winner - if no cells with shells left
-
-  function winner() {
-    if (score === 200) {
-      scoreDisplay.innerHTML = 'game over'
+  function updateScore() {
+    if (hasShell(arielPosition)) {
+      score += 20
+    } if (hasStarfish(arielPosition)) {
+      score += 50
     }
+    scoreDisplay.innerHTML = score
+    winner()
   }
 
+  //* Function for Game Complete
+
+  function winner() {
+    if (scoreDisplay.innerHTML >= 1840) {
+      return scoreDisplay.innerHTML = 'Winner'
+    }
+  }
   winner()
 
   //* Play Music 
@@ -312,8 +287,17 @@ function init() {
   function handleReset() {
     window.location.reload()
   }
-  
 
+
+  //* Ariel Meets Ursula
+
+  function arielCaught() {
+    if (cells[arielPosition + 1].classList.contains(ursulaClass)) {
+      console.log('help')
+    }
+  }
+
+  arielCaught()
   
 
   //* Event Listeners

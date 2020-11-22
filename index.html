@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/main.css">
   <script src="scripts/app.js" charset="utf-8"></script>
   <title>Pac-Man</title>
@@ -11,13 +13,16 @@
 <div class="main-wrapper">
 <header>
   <h1>My Little Mermaid Pacman</h1>
+  <button class="start-button">Start Game</button>
+      <button class="reset-button">Reset Game</button>
+      <button class="music-button">Play Music</button>
+        <p>Score: <span id="score-text"></span></p>
+        <p>Lives: <span id="lives-left">3</span></p>
 </header>
 <main>
   <section class="left-side">
-      <button class="start-button">Start Game</button>
-      <button class="reset-button">Reset Game</button>
-      <button class="music-button">Play Music</button>
-      <p>Score: <span id="score-text"></span></p>
+      <h2>Instructions</h2>
+      <!-- <p>Collect all the Shells before the time runs out. Watch out for Ursula!</p> -->
   </section>
   <section class="right-side">
       <div class ="grid-wrapper">
