@@ -19,6 +19,7 @@ function init() {
   const playMusicButton = document.querySelector('.music-button')
   const resetButton = document.querySelector('.reset-button')
   const startButton = document.querySelector('.start-button')
+  const timerDisplay = document.querySelector('#timer')
 
   
 
@@ -44,6 +45,8 @@ function init() {
 
     
   let timer = 0 
+  let timerId = null
+  let count = 2.30
   let score = 0 
   let lives = 3
   let arielPosition = 84
@@ -220,7 +223,6 @@ function init() {
     }, 500)
   }
 
-  moveUrsula()
 
   console.log(ursulaPosition)
 
@@ -231,6 +233,8 @@ function init() {
   function updateScore() {
     if (hasShell(arielPosition)) {
       score += 20
+      // audio.src = './assets/bubble.mp3'
+      // audio.play()
     } if (hasStarfish(arielPosition)) {
       score += 50
     }
@@ -261,6 +265,24 @@ function init() {
   }
 
 
+  //* Start Game
+
+  function handleStart() {
+    moveUrsula()
+    startTimer()
+  }
+
+  function startTimer() {
+    timerId = setInterval(() => {
+      count = count - 0.01
+      timerDisplay.innerHTML = count.toFixed(2)
+      if (count === 0) {
+        clearInterval(timerId)
+        timerDisplay.innerHTML = 'Times up'
+      }
+    }, 1000)
+  }
+
   //* Ariel caught by Ursula + loose a life function
 
   function arielCaught() {
@@ -278,6 +300,7 @@ function init() {
 
   arielCaught()
 
+  //* Remove Default from up and down arrow key 
 
   function handleKeyDown(event) {
     if (event.which === 38 || event.which === 40) {
@@ -293,6 +316,7 @@ function init() {
   document.addEventListener('keydown', handleKeyDown)
   playMusicButton.addEventListener('click', handlePlaySound)
   resetButton.addEventListener('click', handleReset)
+  startButton.addEventListener('click', handleStart)
   
 
 }
