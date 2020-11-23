@@ -48,6 +48,7 @@ function init() {
 
     
   let timer = 0  
+  let scoreTimer = 0
   let timerId = null
   let count = 2.30
   let score = 0 
@@ -85,7 +86,7 @@ function init() {
         || (i === 41 || i === 41 || i === 54 || i === 67)  || (i === 93 || i === 106 || i === 119 || i === 49 )
         || (i === 49 || i === 62 || i === 75 || i === 49 ) || (i === 101 || i === 114 || i === 127 )
         || (i === 83 || i === 96 || i === 97 || i === 98 || i === 85 )
-        || (i === 56 || i === 57 ||  i === 59 || i === 60) || (i === 122 || i === 124)) {
+        || (i === 56 || i === 57 ||  i === 59 || i === 60) || (i === 122 || i === 124) || (i === 94 || i === 100)) {
         wallCells.push(cells[i])
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
@@ -265,7 +266,7 @@ function init() {
   //* Scoring for Ariel being caught by Ursula 
 
   function arielCaught() {
-    timer = setInterval(() => {
+    scoreTimer = setInterval(() => {
       if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
          (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
          (cells[arielPosition + width].classList.contains(ursulaClass)) ||
@@ -276,11 +277,12 @@ function init() {
          (cells[ursulaPosition - width].classList.contains(arielClass))) {
         lives = lives - 1
         livesLeft.innerHTML = lives
-        clearInterval(timer)
+        // clearInterval(scoreTimer)
       } else if (lives < 1) {
+        // clearInterval(scoreTimer)
         endOfGame()
       }
-    }, 500)
+    }, 400)
   }
 
   arielCaught()
@@ -291,6 +293,7 @@ function init() {
   //* Start Game Function
 
   function handleStart() {
+    document.addEventListener('keyup', handleKeyUp)
     moveUrsula()
     startTimer()
   }
@@ -318,7 +321,7 @@ function init() {
     } if (hasStarfish(arielPosition)) {
       score += 50
       scoreDisplay.innerHTML = score
-    } if (scoreDisplay.innerHTML >= 1720) {
+    } if (scoreDisplay.innerHTML >= 1680) {
       return scoreDisplay.innerHTML = 'Winner'
     }
   }
@@ -328,11 +331,10 @@ function init() {
   function endOfGame() {
     clearInterval(timerId)
     clearInterval(timer)
+    clearInterval(scoreTimer)
     livesLeft.innerHTML = 'No Lives Left'
   }
-  // endOfGame()
-
-
+  
   // Other Effects
 
   //* Play Music 
@@ -361,7 +363,7 @@ function init() {
 
   //* Event Listeners
 
-  document.addEventListener('keyup', handleKeyUp)
+
   document.addEventListener('keydown', handleKeyDown)
   playMusicButton.addEventListener('click', handlePlaySound)
   resetButton.addEventListener('click', handleReset)
