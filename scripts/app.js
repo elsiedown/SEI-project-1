@@ -57,6 +57,7 @@ function init() {
 
 
 
+
   //* Functions
 
   //* Create A Grid
@@ -208,43 +209,54 @@ function init() {
   //* every second or less - move ursula - set an interval 
   // from her position to the left / right
   // make sure she stays on the board 
-
   //* up left right down -- pick these - if you cant do one pick again 
-  // 
  
-  // const randomIndex = Math.floor(Math.random() * cells.length)
 
+  
+
+  function randomMovement() {
+    const randomIndex = Math.floor(Math.random() * movements.length)
+    return movements[randomIndex]
+  }
+
+  const movements = ['right', 'left', 'up', 'down']
+  let movement = randomMovement()
+  console.log('movement', movement)
 
 
   function moveUrsula () {
     timer = setInterval(() => {
       removeUrsula(ursulaPosition)
-      ursulaPosition++
-
       
-      const movements = ['right', 'left', 'up', 'down']
-      const randomIndex = Math.floor(Math.random() * movements.length)
-      const movement = movements[randomIndex]
-      console.log('movement', movement)
-      
-
       switch (movement) {
         case 'right': // right 
-          if (cells[ursulaPosition + 1].classList.contains(wallClass)) ursulaPosition += 0
-          else ursulaPosition++
+          if (cells[ursulaPosition + 1].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else {
+            ursulaPosition++
+          }
           break 
         case 'left': // left
-          if (cells[ursulaPosition - 1].classList.contains(wallClass)) break
-          else ursulaPosition--
-          break
+          if (cells[ursulaPosition - 1].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else {
+            ursulaPosition--
+          }
+          break 
         case 'up': //up
-          if (cells[ursulaPosition - width].classList.contains(wallClass)) break
-          else ursulaPosition -= width
+          if (cells[ursulaPosition - width].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else {
+            ursulaPosition -= width
+          }
           break
         case 'down': //down
-          if (cells[ursulaPosition + width].classList.contains(wallClass)) break
-          else ursulaPosition += width
-          break
+          if (cells[ursulaPosition + width].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else {
+            ursulaPosition += width
+          }
+          break 
         default:
           ursulaPosition++
       } 
@@ -253,7 +265,8 @@ function init() {
   }
 
 
-  console.log(ursulaPosition)
+
+
 
   //* Logic of Ariel being caught by Ursula 
 
@@ -315,7 +328,7 @@ function init() {
 
   function endOfGame() {
     endOfGameTimer = setInterval(() => {
-      if (scoreDisplay.innerHTML >= 1840) {
+      if (scoreDisplay.innerHTML >= 1720) {
         return scoreDisplay.innerHTML = 'Winner'
       } else if (livesLeft.innerHTML === 0) {
         return scoreDisplay.innerHTML === 'Game Over'
