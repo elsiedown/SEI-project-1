@@ -41,20 +41,19 @@ function init() {
   const whirlpools = []
   const shells = []
   const possibleMoves = []
-  console.log(possibleMoves)
 
+
+  const movements = ['right', 'left', 'up', 'down']
+  let movement = randomMovement()
 
     
-  let timer = 0 
+  let timer = 0  
   let timerId = null
-  let endOfGameTimer = 0
   let count = 2.30
   let score = 0 
   let lives = 3
   let arielPosition = 84
   let ursulaPosition = 15
-
-
 
 
 
@@ -205,23 +204,21 @@ function init() {
 
 
 
-  //* Move Ursula Around the Board 
-  //* every second or less - move ursula - set an interval 
-  // from her position to the left / right
-  // make sure she stays on the board 
-  //* up left right down -- pick these - if you cant do one pick again 
- 
 
-  
+  //* Function to Randomise Movement 
 
   function randomMovement() {
     const randomIndex = Math.floor(Math.random() * movements.length)
     return movements[randomIndex]
   }
+  
 
-  const movements = ['right', 'left', 'up', 'down']
-  let movement = randomMovement()
-  console.log('movement', movement)
+  //* Move Ursula Around Board
+  //* Move Ursula Around the Board 
+  //* every second or less - move ursula - set an interval 
+  // from her position to the left / right
+  // make sure she stays on the board 
+  //* up left right down -- pick these - if you cant do one pick again 
 
 
   function moveUrsula () {
@@ -265,24 +262,23 @@ function init() {
   }
 
 
-
-
-
-  //* Logic of Ariel being caught by Ursula 
+  //* Scoring for Ariel being caught by Ursula 
 
   function arielCaught() {
     timer = setInterval(() => {
       if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
          (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
          (cells[arielPosition + width].classList.contains(ursulaClass)) ||
-         (cells[arielPosition - width].classList.contains(ursulaClass))) {
+         (cells[arielPosition - width].classList.contains(ursulaClass)) ||
+         (cells[ursulaPosition + 1].classList.contains(arielClass)) ||
+         (cells[ursulaPosition - 1].classList.contains(arielClass)) ||
+         (cells[ursulaPosition + width].classList.contains(arielClass)) ||
+         (cells[ursulaPosition - width].classList.contains(arielClass))) {
         lives = lives - 1
         livesLeft.innerHTML = lives
         clearInterval(timer)
-      }  if (lives === 0) {
-        livesLeft.innerHTML = 'No Lives Left'
-        clearInterval(timer)
-        // endOfGame()
+      } else if (lives < 1) {
+        endOfGame()
       }
     }, 500)
   }
@@ -303,9 +299,10 @@ function init() {
     timerId = setInterval(() => {
       count = count - 0.01
       timerDisplay.innerHTML = count.toFixed(2)
-      if (count === 0) {
-        clearInterval(timerId)
+      if (count < 0.01) {
         timerDisplay.innerHTML = 'Times up'
+        endOfGame()
+        return
       } 
     }, 1000)
   }
@@ -315,25 +312,23 @@ function init() {
   function updateScore() {
     if (hasShell(arielPosition)) {
       score += 20
+      scoreDisplay.innerHTML = score
       // audio.src = './assets/bubble.mp3'
       // audio.play()
     } if (hasStarfish(arielPosition)) {
       score += 50
+      scoreDisplay.innerHTML = score
+    } if (scoreDisplay.innerHTML >= 1720) {
+      return scoreDisplay.innerHTML = 'Winner'
     }
-    scoreDisplay.innerHTML = score
-    endOfGame()
   }
 
   //* Function for Game Complete
 
   function endOfGame() {
-    endOfGameTimer = setInterval(() => {
-      if (scoreDisplay.innerHTML >= 1720) {
-        return scoreDisplay.innerHTML = 'Winner'
-      } else if (livesLeft.innerHTML === 0) {
-        return scoreDisplay.innerHTML === 'Game Over'
-      } clearInterval(endOfGameTimer)
-    }, 1000)
+    clearInterval(timerId)
+    clearInterval(timer)
+    livesLeft.innerHTML = 'No Lives Left'
   }
   // endOfGame()
 
