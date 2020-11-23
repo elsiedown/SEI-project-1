@@ -40,6 +40,8 @@ function init() {
   const starfishes = []
   const whirlpools = []
   const shells = []
+  const possibleMoves = []
+  console.log(possibleMoves)
 
 
     
@@ -50,7 +52,7 @@ function init() {
   let score = 0 
   let lives = 3
   let arielPosition = 84
-  let ursulaPosition = 22
+  let ursulaPosition = 15
 
 
 
@@ -82,22 +84,26 @@ function init() {
         || (i > 32 && i < 37 ) | (i > 131  && i < 136 ) || (i > 136 && i < 141 )
         || (i === 41 || i === 41 || i === 54 || i === 67)  || (i === 93 || i === 106 || i === 119 || i === 49 )
         || (i === 49 || i === 62 || i === 75 || i === 49 ) || (i === 101 || i === 114 || i === 127 )
-        || (i === 83 || i === 96 || i === 97 || i === 98 || i === 85 )) {
+        || (i === 83 || i === 96 || i === 97 || i === 98 || i === 85 )
+        || (i === 56 || i === 57 ||  i === 59 || i === 60) || (i === 122 || i === 124)) {
         wallCells.push(cells[i])
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
         })
       } else if ((i === 19) || (i === 79 ) || (i  === 89 ) || (i  === 149 )) {
+        possibleMoves.push(cells[i])
         starfishes.push(cells[i])
         starfishes.forEach(starfish=> {
           starfish.classList.add(starfishClass)
         })
       } else if ((i === 14) || (i === 154 )){
+        possibleMoves.push(cells[i])
         whirlpools.push(cells[i])
         whirlpools.forEach(whirlpool=> {
           whirlpool.classList.add(whirlpoolClass)
         })
       } else {
+        possibleMoves.push(cells[i])
         shells.push(cells[i])
         shells.forEach(shell=> {
           shell.classList.add(shellClass)
@@ -196,26 +202,54 @@ function init() {
     addAriel(arielPosition)
   }
 
- 
+
 
   //* Move Ursula Around the Board 
   //* every second or less - move ursula - set an interval 
   // from her position to the left / right
   // make sure she stays on the board 
 
+  //* up left right down -- pick these - if you cant do one pick again 
+  // 
+ 
+  // const randomIndex = Math.floor(Math.random() * cells.length)
+
+
 
   function moveUrsula () {
     timer = setInterval(() => {
-      if (cells[ursulaPosition + 1].classList.contains(wallClass)) {
-        removeUrsula(ursulaPosition)
-        ursulaPosition + width
-        addUrsula(ursulaPosition)
-      } else { 
-        removeUrsula(ursulaPosition)
-        ursulaPosition++
-        addUrsula(ursulaPosition)
-      }
-    }, 500)
+      removeUrsula(ursulaPosition)
+      ursulaPosition++
+
+      
+      const movements = ['right', 'left', 'up', 'down']
+      const randomIndex = Math.floor(Math.random() * movements.length)
+      const movement = movements[randomIndex]
+      console.log('movement', movement)
+      
+
+      switch (movement) {
+        case 'right': // right 
+          if (cells[ursulaPosition + 1].classList.contains(wallClass)) ursulaPosition += 0
+          else ursulaPosition++
+          break 
+        case 'left': // left
+          if (cells[ursulaPosition - 1].classList.contains(wallClass)) break
+          else ursulaPosition--
+          break
+        case 'up': //up
+          if (cells[ursulaPosition - width].classList.contains(wallClass)) break
+          else ursulaPosition -= width
+          break
+        case 'down': //down
+          if (cells[ursulaPosition + width].classList.contains(wallClass)) break
+          else ursulaPosition += width
+          break
+        default:
+          ursulaPosition++
+      } 
+      addUrsula(ursulaPosition)
+    }, 800)
   }
 
 
@@ -230,9 +264,13 @@ function init() {
          (cells[arielPosition + width].classList.contains(ursulaClass)) ||
          (cells[arielPosition - width].classList.contains(ursulaClass))) {
         lives = lives - 1
-        clearInterval()
         livesLeft.innerHTML = lives
-      } 
+        clearInterval(timer)
+      }  if (lives === 0) {
+        livesLeft.innerHTML = 'No Lives Left'
+        clearInterval(timer)
+        // endOfGame()
+      }
     }, 500)
   }
 
@@ -284,7 +322,7 @@ function init() {
       } clearInterval(endOfGameTimer)
     }, 1000)
   }
-  endOfGame()
+  // endOfGame()
 
 
   // Other Effects

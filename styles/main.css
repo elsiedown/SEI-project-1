@@ -28,7 +28,7 @@ h1 {
 main {
   flex-grow: 1;
   display: flex;
-  margin-top: 0;
+  margin: 0;
 }
 
 .left-side {
@@ -41,6 +41,7 @@ main {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  margin: 0 40px 0 40px;
   background-color: none;
 }
 
@@ -71,18 +72,19 @@ button {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  /* height: 100%; */
+  /* height: 80%; */
   justify-content: center;
-  height: 728px;
-  width: 728px;
+  height: 585x;
+  width: 585px;
   background-color: white;
 }
 
 .grid div {
-  border: 0.5px solid grey;
+  border: 0.5px white;;
   flex-grow: 1;
-  height: 56px;
-  width: 56px;
+  height: 45px;
+  width: 45px;
+  background-color: turquoise;
   /* background-image: url('../assets/shell.png');
   background-repeat: no-repeat;
   background-size: 50%;
@@ -111,14 +113,15 @@ button {
 }
 
 .grid div.ursula {
-  background-image: url('../assets/ursula.png');
+  background-image: url('../assets/ursula-2.png');
+  background-color: turquoise;
   background-repeat: no-repeat;
   background-size: contain;
   background-color: none;
 }
 
 .grid div.wall {
-  background-color: lightblue;
+  background-color: darkslategray;
   background-image: none;
 }
 
