@@ -45,6 +45,7 @@ function init() {
     
   let timer = 0 
   let timerId = null
+  let endOfGameTimer = 0
   let count = 2.30
   let score = 0 
   let lives = 3
@@ -52,7 +53,7 @@ function init() {
   let ursulaPosition = 22
 
 
-  
+
 
   //* Functions
 
@@ -254,7 +255,7 @@ function init() {
       if (count === 0) {
         clearInterval(timerId)
         timerDisplay.innerHTML = 'Times up'
-      }
+      } 
     }, 1000)
   }
 
@@ -275,9 +276,13 @@ function init() {
   //* Function for Game Complete
 
   function endOfGame() {
-    if (scoreDisplay.innerHTML >= 1840) {
-      return scoreDisplay.innerHTML = 'Winner'
-    }
+    endOfGameTimer = setInterval(() => {
+      if (scoreDisplay.innerHTML >= 1840) {
+        return scoreDisplay.innerHTML = 'Winner'
+      } else if (livesLeft.innerHTML === 0) {
+        return scoreDisplay.innerHTML === 'Game Over'
+      } clearInterval(endOfGameTimer)
+    }, 1000)
   }
   endOfGame()
 
