@@ -1,13 +1,13 @@
 function init() {
 
   //** To Do
-  // Add Ariel to the Board in specific startingposition
+  // Start Button Should start the game
+  // Add Grid with walls, shells, etc
+  // Add Ariel to the Board in specific starting position
   // Make sure Ariel stays on board and cant move into walls, can move up down left and right
   // Add Urusula to the board in specific position (add other ghosts later)
-  // Add shellls to each square
-  // Ariel must be able to move up and down within the board 
   // Ghosts move in random direction (add random direction towards Ariel later on)
-  //
+  
   
 
   //* Elements
@@ -41,7 +41,6 @@ function init() {
   const whirlpools = []
   const shells = []
 
-  const wallLayout = [28, 29, 30, 31, ,33, 34, 35, 36]
 
     
   let timer = 0 
@@ -51,6 +50,9 @@ function init() {
   let lives = 3
   let arielPosition = 84
   let ursulaPosition = 22
+
+
+  
 
   //* Functions
 
@@ -62,7 +64,6 @@ function init() {
       // cell.innerHTML = i
       grid.appendChild(cell)
       cells.push(cell)
-      // cell.classList.add(shellClass)
     }
     addUrsula(ursulaPosition)
     addToGrid()
@@ -72,7 +73,7 @@ function init() {
 
   createGrid(arielPosition)
 
-  //* Add Walls, Starfish and Whirpools
+  //* Add Walls, Starfish and Whirpools to Grid
 
   function addToGrid() {
     for (let i = 0; i < cells.length; i++) {
@@ -85,7 +86,7 @@ function init() {
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
         })
-      } else if ((i === 19) || (i === 79 ) || (i  === 89 ) || (i  === 149 ) ){
+      } else if ((i === 19) || (i === 79 ) || (i  === 89 ) || (i  === 149 )) {
         starfishes.push(cells[i])
         starfishes.forEach(starfish=> {
           starfish.classList.add(starfishClass)
@@ -103,6 +104,9 @@ function init() {
       }
     }
   }
+
+  // Items: 
+
 
   //* Remove Item
 
@@ -126,7 +130,9 @@ function init() {
     return cells[position].classList.contains(starfishClass)
   }
 
-  //* Add Ariel
+  //* Characters
+  
+  //Add Ariel
 
   function addAriel(position) {
     removeItem(arielPosition)
@@ -196,24 +202,6 @@ function init() {
   // from her position to the left / right
   // make sure she stays on the board 
 
-  // const ursulaHorizontal = ursulaPosition % width 
-  // const ursulaVertical = Math.floor(ursulaPosition / width)
-  // const ursulaArray = ['right', 'left', 'up', 'down']
-
-  // const moveRight = ursulaPosition++
-  // const moveLeft = ursulaPosition--
-  // const moveUp = ursulaPosition += width 
-  // const moveDown = ursulaPosition += width 
-
-  // ursulaArray.push(moveRight)
-  // ursulaArray.push(moveLeft)
-  // ursulaArray.push(moveDown)
-  // ursulaArray.push(moveUp)
-
-  const randomIndex = Math.floor(Math.random() * cells.length)
-    
-  // if hits walls then skip
-  // if 
 
   function moveUrsula () {
     timer = setInterval(() => {
@@ -232,46 +220,27 @@ function init() {
 
   console.log(ursulaPosition)
 
+  //* Logic of Ariel being caught by Ursula 
 
-
-  //* Function for score:
-
-  function updateScore() {
-    if (hasShell(arielPosition)) {
-      score += 20
-      // audio.src = './assets/bubble.mp3'
-      // audio.play()
-    } if (hasStarfish(arielPosition)) {
-      score += 50
-    }
-    scoreDisplay.innerHTML = score
-    winner()
+  function arielCaught() {
+    timer = setInterval(() => {
+      if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
+         (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
+         (cells[arielPosition + width].classList.contains(ursulaClass)) ||
+         (cells[arielPosition - width].classList.contains(ursulaClass))) {
+        lives = lives - 1
+        clearInterval()
+        livesLeft.innerHTML = lives
+      } 
+    }, 500)
   }
 
-  //* Function for Game Complete
-
-  function winner() {
-    if (scoreDisplay.innerHTML >= 1840) {
-      return scoreDisplay.innerHTML = 'Winner'
-    }
-  }
-  winner()
-
-  //* Play Music 
-
-  function handlePlaySound() {
-    audio.src = './assets/Under the Sea.mp3'
-    audio.play()
-  }
-  
-  //* Reset Game
-
-  function handleReset() {
-    window.location.reload()
-  }
+  arielCaught()
 
 
-  //* Start Game
+  // Start, End and Scoring
+
+  //* Start Game Function
 
   function handleStart() {
     moveUrsula()
@@ -289,22 +258,45 @@ function init() {
     }, 1000)
   }
 
-  //* Ariel caught by Ursula + loose a life function
+  //* Function for score:
 
-  function arielCaught() {
-    timer = setInterval(() => {
-      if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
-         (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
-         (cells[arielPosition + width].classList.contains(ursulaClass)) ||
-         (cells[arielPosition - width].classList.contains(ursulaClass))) {
-        lives = lives - 1
-        clearInterval()
-        livesLeft.innerHTML = lives
-      } 
-    }, 500)
+  function updateScore() {
+    if (hasShell(arielPosition)) {
+      score += 20
+      // audio.src = './assets/bubble.mp3'
+      // audio.play()
+    } if (hasStarfish(arielPosition)) {
+      score += 50
+    }
+    scoreDisplay.innerHTML = score
+    endOfGame()
   }
 
-  arielCaught()
+  //* Function for Game Complete
+
+  function endOfGame() {
+    if (scoreDisplay.innerHTML >= 1840) {
+      return scoreDisplay.innerHTML = 'Winner'
+    }
+  }
+  endOfGame()
+
+
+  // Other Effects
+
+  //* Play Music 
+
+  function handlePlaySound() {
+    audio.src = './assets/Under the Sea.mp3'
+    audio.play()
+  }
+  
+  //* Reset Game
+
+  function handleReset() {
+    window.location.reload()
+  }
+
 
   //* Remove Default from up and down arrow key 
 
