@@ -260,7 +260,7 @@ function init() {
           } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ghosts[index].currentPosition++
+            compareCoordinates(index, ghosts[index].currentPosition++)
           }
           break 
         case 'left': // left
@@ -271,7 +271,7 @@ function init() {
           } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ghosts[index].currentPosition--
+            compareCoordinates(index, ghosts[index].currentPosition--)
           }
           break 
         case 'up': //up
@@ -282,7 +282,7 @@ function init() {
           } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ghosts[index].currentPosition -= width
+            compareCoordinates(index, ghosts[index].currentPosition -= width)
           }
           break
         case 'down': //down
@@ -293,7 +293,7 @@ function init() {
           } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ghosts[index].currentPosition += width
+            compareCoordinates(index, ghosts[index].currentPosition += width)
           }
           break 
         default:
@@ -307,24 +307,25 @@ function init() {
   // coordinates of ariel position
   // if coordinate of (ariel position - ghosts new position) is bigger than (ariel position - ghost current position) - find another move
   // if coordinate of ghost new position is smaller  - move forward 
+  // find a way of putting this into the move ghost function whereby the new ghost is adding a number instead of the number put in 
   
   function findCoordinates(index) {
     return [index % width, Math.floor(index / width)]
   }
 
-  function compareCoordinates(index) {
+  function compareCoordinates(index, newMovement) {
     const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
-    const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + 40)
+    const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + newMovement)
     const [arielX, arielY] = findCoordinates(arielPosition)
     console.log([newGhostX, newGhostY])
     if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) > (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
-      console.log('Try Another Move')
+      randomMovement()
     } else if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))) {
-      console.log('Move Into New Position')
+      return newMovement
     }
   }
 
-  compareCoordinates((3))
+ 
   
 
 
