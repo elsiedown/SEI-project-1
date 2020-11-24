@@ -45,10 +45,10 @@ function init() {
   const possibleMoves = []
 
   let ghosts = [
-    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 800 },
-    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 600 },
-    { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 1000 },
-    { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 900 }
+    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 400 },
+    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 300 },
+    { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 600 },
+    { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 800 }
   ]
    
 
@@ -57,7 +57,7 @@ function init() {
 
     
   // let moveGhostTimer = 0 
-  let ghostTimerId = 0 
+  // let ghostTimerId = 0 
   let scoreTimer = 0
   let startTimerId = null
   let countSeconds = 60
@@ -257,8 +257,6 @@ function init() {
             movement = randomMovement()
           } else if ((cells[ghosts[index].currentPosition + 1].classList.contains(ursulaClass))) {
             movement = randomMovement()
-          } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
-            movement = randomMovement()
           } else {
             compareCoordinates(index, ghosts[index].currentPosition++)
           }
@@ -267,8 +265,6 @@ function init() {
           if (cells[ghosts[index].currentPosition - 1].classList.contains(wallClass)) {
             movement = randomMovement()
           } else if ((cells[ghosts[index].currentPosition - 1].classList.contains(ursulaClass))) {
-            movement = randomMovement()
-          } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
             compareCoordinates(index, ghosts[index].currentPosition--)
@@ -279,8 +275,6 @@ function init() {
             movement = randomMovement()
           } else if ((cells[ghosts[index].currentPosition - width].classList.contains(ursulaClass))) {
             movement = randomMovement()
-          } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
-            movement = randomMovement()
           } else {
             compareCoordinates(index, ghosts[index].currentPosition -= width)
           }
@@ -290,14 +284,12 @@ function init() {
             movement = randomMovement()
           } else if ((cells[ghosts[index].currentPosition + width].classList.contains(ursulaClass))) {
             movement = randomMovement()
-          } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
-            movement = randomMovement()
           } else {
             compareCoordinates(index, ghosts[index].currentPosition += width)
           }
           break 
         default:
-          ghosts[index].currentPosition++
+          compareCoordinates(index, ghosts[index].currentPosition++)
       } 
       addGhost(ghosts[index].currentPosition)
     }, timeInterval)
@@ -317,11 +309,10 @@ function init() {
     const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
     const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + newMovement)
     const [arielX, arielY] = findCoordinates(arielPosition)
-    console.log([newGhostX, newGhostY])
-    if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) > (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
-      randomMovement()
+    if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
+      newMovement
     } else if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))) {
-      return newMovement
+      randomMovement()
     }
   }
 
