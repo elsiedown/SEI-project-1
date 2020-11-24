@@ -303,7 +303,29 @@ function init() {
     }, timeInterval)
   }
 
+  //*   Find coordinates of ghost new position
+  // coordinates of ariel position
+  // if coordinate of (ghosts new position - ariel positiion) is bigger than ariel position - ghost current position - find another move
+  // if coordinate of ghost new position is smaller  - move forward 
+  
+  function findCoordinates(index) {
+    return [index % width, Math.floor(index / width)]
+  }
 
+  function compareCoordinates(index) {
+    const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
+    const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + 40 )
+    const [arielX, arielY] = findCoordinates(arielPosition)
+    console.log([currentGhostX, currentGhostY])
+    if (((newGhostX - arielX) || (newGhostY - arielY)) > ((currentGhostX - arielX) || (currentGhostY - arielY))){
+      console.log('Try Another Move')
+    } else if (((newGhostX - arielX) || (newGhostY - arielY)) < ((currentGhostX - arielX) || (currentGhostY - arielY))) {
+      console.log('Move Forward')
+    }
+  }
+
+  compareCoordinates((1))
+  
 
 
   //* Scoring for Ariel being caught by Ghost
@@ -371,7 +393,7 @@ function init() {
       scoreDisplay.innerHTML = score
     } if (scoreDisplay.innerHTML >= 1700) {
       endOfGame()
-      return scoreDisplay.innerHTML = 'Winner'
+      return yourScore.innerHTML = `You Won! You Collected all Shells! You Scored ${score}`
     }
   }
 
