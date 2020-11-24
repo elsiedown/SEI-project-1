@@ -21,7 +21,6 @@ function init() {
   const startButton = document.querySelector('.start-button')
   const timerDisplay = document.querySelector('#timer')
 
-  
 
   const arielClass = 'ariel'
   const ursulaClass = 'ursula'
@@ -30,7 +29,6 @@ function init() {
   const starfishClass = 'starfish'
   const whirlpoolClass = 'whirlpool'
 
-  
 
   //* Variables
 
@@ -44,17 +42,12 @@ function init() {
   const possibleMoves = []
 
   let ghosts = [
-    { name: 'ghostOne', startPosition: 15, currentPosition: 15, timerId: 0 },
-    { name: 'ghostTWo', startPosition: 23, currentPosition: 23, timerID: 0 },
-    { name: 'ghostThree', startPosition: 145, currentPosition: 145, timerID: 0 },
-    { name: 'ghostFour', startPosition: 153, currentPosition: 153, timerID: 0 }
+    { name: 'ghostOne', startPosition: 15, currentPosition: 15, timerId: 0, timeInterval: 800 },
+    { name: 'ghostTWo', startPosition: 23, currentPosition: 23, timerId: 0, timeInterval: 600 },
+    { name: 'ghostThree', startPosition: 145, currentPosition: 145, timerId: 0, timeInterval: 1000 },
+    { name: 'ghostFour', startPosition: 153, currentPosition: 153, timerId: 0, timeInterval: 900 }
   ]
    
-  
-  
-
-  
-
 
   const movements = ['right', 'left', 'up', 'down']
   let movement = randomMovement()
@@ -67,9 +60,6 @@ function init() {
   let score = 0 
   let lives = 3
   let arielPosition = 84
-  // let ursulaPosition = 15
-
-  
 
 
   //* Functions
@@ -97,21 +87,21 @@ function init() {
     for (let i = 0; i < cells.length; i++) {
       if ((i < 13 || i > 155) || (i % 13 === 0) || (i % 13 === 12) || (i > 27 && i < 32 ) 
         || (i > 32 && i < 37 ) | (i > 131  && i < 136 ) || (i > 136 && i < 141 )
-        || (i === 41 || i === 41 || i === 54 || i === 67)  || (i === 93 || i === 106 || i === 119 || i === 49 )
-        || (i === 49 || i === 62 || i === 75 || i === 49 ) || (i === 101 || i === 114 || i === 127 )
-        || (i === 83 || i === 96 || i === 97 || i === 98 || i === 85 )
+        || (i === 41 || i === 41)  || (i === 119 || i === 49 )
+        || (i === 49  || i === 49 ) || (i === 127 )
+        || (i === 83 || i === 96 || i === 97 || i === 98 || i === 85 || i === 92 || i === 66 || i === 76 || i === 102)
         || (i === 56 || i === 57 ||  i === 59 || i === 60) || (i === 122 || i === 124) || (i === 94 || i === 100)) {
         wallCells.push(cells[i])
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
         })
-      } else if ((i === 19) || (i === 79 ) || (i  === 89 ) || (i  === 149 )) {
+      } else if ((i === 19) || (i === 14 ) || (i  === 154 ) || (i  === 149 )) {
         possibleMoves.push(cells[i])
         starfishes.push(cells[i])
         starfishes.forEach(starfish=> {
           starfish.classList.add(starfishClass)
         })
-      } else if ((i === 14) || (i === 154 )){
+      } else if ((i === 79) || (i === 89 )){
         possibleMoves.push(cells[i])
         whirlpools.push(cells[i])
         whirlpools.forEach(whirlpool=> {
@@ -126,6 +116,7 @@ function init() {
       }
     }
   }
+
 
   // Items: 
 
@@ -142,8 +133,6 @@ function init() {
     }  
   }
 
-  
-
   //* Has shell or starfish function
 
   function hasShell(position) {
@@ -153,6 +142,8 @@ function init() {
   function hasStarfish(position) {
     return cells[position].classList.contains(starfishClass)
   }
+
+
 
   //* Characters
   
@@ -169,7 +160,45 @@ function init() {
     cells[position].classList.remove(arielClass)
   }
 
-  //* Add Ursula to Grid 
+
+  //* Move Ariel Around the Board
+
+  function handleKeyUp(event) {
+    removeAriel(arielPosition)
+
+    //* Horizontal and Vertical Axis 
+    const horizontal = arielPosition % width 
+    const vertical = Math.floor(arielPosition / width)
+    
+    
+    switch (event.keyCode) {
+      case 39: // right 
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 80
+        else if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
+        else if (horizontal < width - 2) arielPosition++ 
+        break 
+      case 37: // left
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 88
+        if (cells[arielPosition - 1].classList.contains(wallClass)) arielPosition += 0
+        else if (horizontal > 1) arielPosition-- 
+        break
+      case 38: //up
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 89
+        if (cells[arielPosition - width].classList.contains(wallClass)) arielPosition += 0
+        else if (vertical > 1) arielPosition -= width
+        break
+      case 40: //down
+        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 79
+        if (cells[arielPosition + width].classList.contains(wallClass)) arielPosition += 0
+        else if (vertical < width - 2) arielPosition += width
+        break
+      default:
+        console.log('Invalid Key') //* remove for prompt window 
+    } 
+    addAriel(arielPosition)
+  }
+
+  //* Add Ghosts to Grid 
 
   function addGhostStart() {
     cells[ghosts[0].startPosition].classList.add(ursulaClass)
@@ -186,7 +215,7 @@ function init() {
   }
 
 
-  //* Remove Ursula from Grid 
+  //* Remove Ghosts from Grid 
 
   function removeGhost() {
     cells[ghosts[0].currentPosition].classList.remove(ursulaClass)
@@ -194,46 +223,6 @@ function init() {
     cells[ghosts[2].currentPosition].classList.remove(ursulaClass)
     cells[ghosts[3].currentPosition].classList.remove(ursulaClass)
   }
-
-
-  //* Move Ariel Around the Board
-
-  function handleKeyUp(event) {
-    removeAriel(arielPosition)
-
-    //* Horizontal and Vertical Axis 
-    const horizontal = arielPosition % width 
-    const vertical = Math.floor(arielPosition / width)
-    
-    
-    switch (event.keyCode) {
-      case 39: // right 
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 15
-        else if (cells[arielPosition + 1].classList.contains(wallClass)) arielPosition += 0
-        else if (horizontal < width - 2) arielPosition++ 
-        break 
-      case 37: // left
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 153
-        if (cells[arielPosition - 1].classList.contains(wallClass)) arielPosition += 0
-        else if (horizontal > 1) arielPosition-- 
-        break
-      case 38: //up
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 153
-        if (cells[arielPosition - width].classList.contains(wallClass)) arielPosition += 0
-        else if (vertical > 1) arielPosition -= width
-        break
-      case 40: //down
-        if (cells[arielPosition].classList.contains(whirlpoolClass)) arielPosition = 15
-        if (cells[arielPosition + width].classList.contains(wallClass)) arielPosition += 0
-        else if (vertical < width - 2) arielPosition += width
-        break
-      default:
-        console.log('Invalid Key') //* remove for prompt window 
-    } 
-    addAriel(arielPosition)
-  }
-
-
 
 
   //* Function to Randomise Movement 
@@ -252,15 +241,16 @@ function init() {
   //* up left right down -- pick these - if you cant do one pick again 
   // if at starfish - move down
 
-  
 
-  function moveGhost(index) {
+  function moveGhost(index, timeInterval) {
     timer = setInterval(() => {
       removeGhost(ghosts[index].currentPosition)
       
       switch (movement) {
         case 'right': // right 
           if (cells[ghosts[index].currentPosition + 1].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else if ((cells[ghosts[index].currentPosition + 1].classList.contains(ursulaClass))) {
             movement = randomMovement()
           } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
@@ -271,6 +261,8 @@ function init() {
         case 'left': // left
           if (cells[ghosts[index].currentPosition - 1].classList.contains(wallClass)) {
             movement = randomMovement()
+          } else if ((cells[ghosts[index].currentPosition - 1].classList.contains(ursulaClass))) {
+            movement = randomMovement()
           } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
@@ -280,6 +272,8 @@ function init() {
         case 'up': //up
           if (cells[ghosts[index].currentPosition - width].classList.contains(wallClass)) {
             movement = randomMovement()
+          } else if ((cells[ghosts[index].currentPosition - width].classList.contains(ursulaClass))) {
+            movement = randomMovement()
           } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
@@ -288,6 +282,8 @@ function init() {
           break
         case 'down': //down
           if (cells[ghosts[index].currentPosition + width].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else if ((cells[ghosts[index].currentPosition + width].classList.contains(ursulaClass))) {
             movement = randomMovement()
           } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
@@ -299,30 +295,26 @@ function init() {
           ghosts[index].currentPosition++
       } 
       addGhost(ghosts[index].currentPosition)
-    }, 800)
+    }, timeInterval)
   }
+
+
 
 
   //* Scoring for Ariel being caught by Ursula 
 
   function arielCaught(index) {
     scoreTimer = setInterval(() => {
-      if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
-         (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
-         (cells[arielPosition + width].classList.contains(ursulaClass)) ||
-         (cells[arielPosition - width].classList.contains(ursulaClass)) ||
-         (cells[ghosts[index].currentPosition + 1].classList.contains(arielClass)) ||
-         (cells[ghosts[index].currentPosition - 1].classList.contains(arielClass)) ||
-         (cells[ghosts[index].currentPosition + width].classList.contains(arielClass)) ||
-         (cells[ghosts[index].currentPosition - width].classList.contains(arielClass))) {
+      if (cells[ghosts[index].currentPosition].classList.contains(arielClass)) {
+        removeAriel(arielPosition)
+        arielPosition = 84
+        addAriel(arielPosition)
         lives = lives - 1
         livesLeft.innerHTML = lives
-        // clearInterval(scoreTimer)
       } else if (lives < 1) {
-        // clearInterval(scoreTimer)
         endOfGame()
       }
-    }, 400)
+    }, 200)
   }
 
   arielCaught(0)
@@ -331,16 +323,18 @@ function init() {
   arielCaught(3)
 
 
+
+
   // Start, End and Scoring
 
   //* Start Game Function
 
   function handleStart() {
     document.addEventListener('keyup', handleKeyUp)
-    moveGhost(0)
-    moveGhost(1)
-    moveGhost(2)
-    moveGhost(3)
+    moveGhost(0, ghosts[0].timeInterval)
+    moveGhost(1, ghosts[1].timeInterval)
+    moveGhost(2, ghosts[2].timeInterval)
+    moveGhost(3, ghosts[3].timeInterval)
     startTimer()
   }
 
@@ -368,6 +362,7 @@ function init() {
       score += 50
       scoreDisplay.innerHTML = score
     } if (scoreDisplay.innerHTML >= 1680) {
+      endOfGame()
       return scoreDisplay.innerHTML = 'Winner'
     }
   }
@@ -405,7 +400,7 @@ function init() {
     }
 
   }
-  
+
 
   //* Event Listeners
 
