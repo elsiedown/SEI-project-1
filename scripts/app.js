@@ -46,7 +46,7 @@ function init() {
 
   let ghosts = [
     { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 800 },
-    { name: 'ghostTWo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 600 },
+    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 600 },
     { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 1000 },
     { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 900 }
   ]
@@ -248,7 +248,7 @@ function init() {
 
 
   function moveGhost(index, timeInterval) {
-    ghostTimerId = setInterval(() => {
+    ghosts[index].timerId = setInterval(() => {
       removeGhost(ghosts[index].currentPosition)
       
       switch (movement) {
@@ -338,10 +338,9 @@ function init() {
 
   function handleStart() {
     document.addEventListener('keyup', handleKeyUp)
-    moveGhost(0, ghosts[0].timeInterval)
-    moveGhost(1, ghosts[1].timeInterval)
-    moveGhost(2, ghosts[2].timeInterval)
-    moveGhost(3, ghosts[3].timeInterval)
+    ghosts.forEach((ghost, index) => {
+      moveGhost(index, ghost.timeInterval)
+    })
     startTimer()
   }
 
@@ -379,7 +378,7 @@ function init() {
   //* Function for Game Complete
 
   function endOfGame() {
-    clearInterval(ghostTimerId)
+    ghosts.forEach(ghost => clearInterval(ghost.timerId))
     clearInterval(startTimerId)
     clearInterval(scoreTimer)
     removeAriel(arielPosition)
