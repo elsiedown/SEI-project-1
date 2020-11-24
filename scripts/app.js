@@ -19,7 +19,10 @@ function init() {
   const playMusicButton = document.querySelector('.music-button')
   const resetButton = document.querySelector('.reset-button')
   const startButton = document.querySelector('.start-button')
-  const timerDisplay = document.querySelector('#timer')
+  const timerDisplay = document.querySelector('#timer-display')
+  const yourScore = document.querySelector('#your-score')
+  // const timerSecondsDisplay = document.querySelector('#seconds')
+  // const timerMinutesDisplay = document.querySelector('#minutes')
 
 
   const arielClass = 'ariel'
@@ -42,10 +45,10 @@ function init() {
   const possibleMoves = []
 
   let ghosts = [
-    { name: 'ghostOne', startPosition: 15, currentPosition: 15, timerId: 0, timeInterval: 800 },
-    { name: 'ghostTWo', startPosition: 23, currentPosition: 23, timerId: 0, timeInterval: 600 },
-    { name: 'ghostThree', startPosition: 145, currentPosition: 145, timerId: 0, timeInterval: 1000 },
-    { name: 'ghostFour', startPosition: 153, currentPosition: 153, timerId: 0, timeInterval: 900 }
+    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 800 },
+    { name: 'ghostTWo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 600 },
+    { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 1000 },
+    { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 900 }
   ]
    
 
@@ -53,10 +56,12 @@ function init() {
   let movement = randomMovement()
 
     
-  let timer = 0  
+  // let moveGhostTimer = 0 
+  let ghostTimerId = 0 
   let scoreTimer = 0
-  let timerId = null
-  let count = 2.30
+  let startTimerId = null
+  let countSeconds = 60
+  // let countMinutes = 2
   let score = 0 
   let lives = 3
   let arielPosition = 84
@@ -95,7 +100,7 @@ function init() {
         wallCells.forEach(wallCell=> {
           wallCell.classList.add(wallClass)
         })
-      } else if ((i === 19) || (i === 14 ) || (i  === 154 ) || (i  === 149 )) {
+      } else if ((i === 19) || (i  === 149 )) {
         possibleMoves.push(cells[i])
         starfishes.push(cells[i])
         starfishes.forEach(starfish=> {
@@ -243,7 +248,7 @@ function init() {
 
 
   function moveGhost(index, timeInterval) {
-    timer = setInterval(() => {
+    ghostTimerId = setInterval(() => {
       removeGhost(ghosts[index].currentPosition)
       
       switch (movement) {
@@ -313,6 +318,8 @@ function init() {
         livesLeft.innerHTML = lives
       } else if (lives < 1) {
         endOfGame()
+        livesLeft.innerHTML = 'No Lives Left'
+        yourScore.innerHTML = `Game Over! You Scored ${score}`
       }
     }, 200)
   }
@@ -339,11 +346,13 @@ function init() {
   }
 
   function startTimer() {
-    timerId = setInterval(() => {
-      count = count - 0.01
-      timerDisplay.innerHTML = count.toFixed(2)
-      if (count < 0.01) {
-        timerDisplay.innerHTML = 'Times up'
+    if (startTimerId) return
+    startTimerId = setInterval(() => {
+      countSeconds = countSeconds - 1
+      timerDisplay.innerHTML = countSeconds
+      if (countSeconds < 1 ){ 
+        timerDisplay.innerHTML = 'Times Up'
+        yourScore.innerHTML = `Game Over! You Scored ${score}`
         endOfGame()
         return
       } 
@@ -361,7 +370,7 @@ function init() {
     } if (hasStarfish(arielPosition)) {
       score += 50
       scoreDisplay.innerHTML = score
-    } if (scoreDisplay.innerHTML >= 1680) {
+    } if (scoreDisplay.innerHTML >= 1760) {
       endOfGame()
       return scoreDisplay.innerHTML = 'Winner'
     }
@@ -370,10 +379,10 @@ function init() {
   //* Function for Game Complete
 
   function endOfGame() {
-    clearInterval(timerId)
-    clearInterval(timer)
+    clearInterval(ghostTimerId)
+    clearInterval(startTimerId)
     clearInterval(scoreTimer)
-    livesLeft.innerHTML = 'No Lives Left'
+    removeAriel(arielPosition)
   }
   
   // Other Effects
