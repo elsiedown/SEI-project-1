@@ -112,6 +112,12 @@ button {
   background-image: url('../assets/starfish.png')
 }
 
+.grid div.whirlpool {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url('../assets/water-portal.png')
+}
+
 .grid div.ursula {
   background-image: url('../assets/ursula-2.png');
   background-color: turquoise;
@@ -123,11 +129,9 @@ button {
 .grid div.wall {
   background-color: darkslategray;
   background-image: none;
+  border: 0.2px lightgray solid;
 }
 
-.grid div.whirlpool {
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url('../assets/water-portal.png')
+.grid div.junction {
+  background-color: turquoise;
 }
-

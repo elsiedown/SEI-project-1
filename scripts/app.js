@@ -29,6 +29,7 @@ function init() {
   const wallClass = 'wall'
   const starfishClass = 'starfish'
   const whirlpoolClass = 'whirlpool'
+
   
 
   //* Variables
@@ -41,6 +42,7 @@ function init() {
   const whirlpools = []
   const shells = []
   const possibleMoves = []
+  
 
 
   const movements = ['right', 'left', 'up', 'down']
@@ -56,6 +58,7 @@ function init() {
   let arielPosition = 84
   let ursulaPosition = 15
 
+  
 
 
   //* Functions
@@ -127,6 +130,8 @@ function init() {
       cells[position].classList.remove(starfishClass)
     }  
   }
+
+  
 
   //* Has shell or starfish function
 
@@ -220,7 +225,9 @@ function init() {
   // from her position to the left / right
   // make sure she stays on the board 
   //* up left right down -- pick these - if you cant do one pick again 
+  // if at starfish - move down
 
+  
 
   function moveUrsula () {
     timer = setInterval(() => {
@@ -230,12 +237,16 @@ function init() {
         case 'right': // right 
           if (cells[ursulaPosition + 1].classList.contains(wallClass)) {
             movement = randomMovement()
+          } else if (cells[ursulaPosition].classList.contains(starfishClass)) {
+            movement = randomMovement()
           } else {
             ursulaPosition++
           }
           break 
         case 'left': // left
           if (cells[ursulaPosition - 1].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else if (cells[ursulaPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
             ursulaPosition--
@@ -244,12 +255,16 @@ function init() {
         case 'up': //up
           if (cells[ursulaPosition - width].classList.contains(wallClass)) {
             movement = randomMovement()
+          } else if (cells[ursulaPosition - 1].classList.contains(starfishClass)) {
+            movement = randomMovement()
           } else {
             ursulaPosition -= width
           }
           break
         case 'down': //down
           if (cells[ursulaPosition + width].classList.contains(wallClass)) {
+            movement = randomMovement()
+          } else if (cells[ursulaPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
             ursulaPosition += width
