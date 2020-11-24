@@ -42,6 +42,17 @@ function init() {
   const whirlpools = []
   const shells = []
   const possibleMoves = []
+
+  let ghosts = [
+    { name: 'ghostOne', startPosition: 15, currentPosition: 15, timerId: 0 },
+    { name: 'ghostTWo', startPosition: 23, currentPosition: 23, timerID: 0 },
+    { name: 'ghostThree', startPosition: 145, currentPosition: 145, timerID: 0 },
+    { name: 'ghostFour', startPosition: 153, currentPosition: 153, timerID: 0 }
+  ]
+   
+  
+  
+
   
 
 
@@ -56,7 +67,7 @@ function init() {
   let score = 0 
   let lives = 3
   let arielPosition = 84
-  let ursulaPosition = 15
+  // let ursulaPosition = 15
 
   
 
@@ -72,7 +83,7 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
     }
-    addUrsula(ursulaPosition)
+    addGhostStart()
     addToGrid()
     addAriel(position)
     scoreDisplay.innerHTML = 0
@@ -160,14 +171,28 @@ function init() {
 
   //* Add Ursula to Grid 
 
-  function addUrsula(position) {
-    cells[position].classList.add(ursulaClass)
+  function addGhostStart() {
+    cells[ghosts[0].startPosition].classList.add(ursulaClass)
+    cells[ghosts[1].startPosition].classList.add(ursulaClass)
+    cells[ghosts[2].startPosition].classList.add(ursulaClass)
+    cells[ghosts[3].startPosition].classList.add(ursulaClass)
   }
+
+  function addGhost() {
+    cells[ghosts[0].currentPosition].classList.add(ursulaClass)
+    cells[ghosts[1].currentPosition].classList.add(ursulaClass)
+    cells[ghosts[2].currentPosition].classList.add(ursulaClass)
+    cells[ghosts[3].currentPosition].classList.add(ursulaClass)
+  }
+
 
   //* Remove Ursula from Grid 
 
-  function removeUrsula(position) {
-    cells[position].classList.remove(ursulaClass)
+  function removeGhost() {
+    cells[ghosts[0].currentPosition].classList.remove(ursulaClass)
+    cells[ghosts[1].currentPosition].classList.remove(ursulaClass)
+    cells[ghosts[2].currentPosition].classList.remove(ursulaClass)
+    cells[ghosts[3].currentPosition].classList.remove(ursulaClass)
   }
 
 
@@ -229,67 +254,67 @@ function init() {
 
   
 
-  function moveUrsula () {
+  function moveGhost(index) {
     timer = setInterval(() => {
-      removeUrsula(ursulaPosition)
+      removeGhost(ghosts[index].currentPosition)
       
       switch (movement) {
         case 'right': // right 
-          if (cells[ursulaPosition + 1].classList.contains(wallClass)) {
+          if (cells[ghosts[index].currentPosition + 1].classList.contains(wallClass)) {
             movement = randomMovement()
-          } else if (cells[ursulaPosition].classList.contains(starfishClass)) {
+          } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ursulaPosition++
+            ghosts[index].currentPosition++
           }
           break 
         case 'left': // left
-          if (cells[ursulaPosition - 1].classList.contains(wallClass)) {
+          if (cells[ghosts[index].currentPosition - 1].classList.contains(wallClass)) {
             movement = randomMovement()
-          } else if (cells[ursulaPosition].classList.contains(starfishClass)) {
+          } else if (cells[ghosts[index].currentPosition].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ursulaPosition--
+            ghosts[index].currentPosition--
           }
           break 
         case 'up': //up
-          if (cells[ursulaPosition - width].classList.contains(wallClass)) {
+          if (cells[ghosts[index].currentPosition - width].classList.contains(wallClass)) {
             movement = randomMovement()
-          } else if (cells[ursulaPosition - 1].classList.contains(starfishClass)) {
+          } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ursulaPosition -= width
+            ghosts[index].currentPosition -= width
           }
           break
         case 'down': //down
-          if (cells[ursulaPosition + width].classList.contains(wallClass)) {
+          if (cells[ghosts[index].currentPosition + width].classList.contains(wallClass)) {
             movement = randomMovement()
-          } else if (cells[ursulaPosition - 1].classList.contains(starfishClass)) {
+          } else if (cells[ghosts[index].currentPosition - 1].classList.contains(starfishClass)) {
             movement = randomMovement()
           } else {
-            ursulaPosition += width
+            ghosts[index].currentPosition += width
           }
           break 
         default:
-          ursulaPosition++
+          ghosts[index].currentPosition++
       } 
-      addUrsula(ursulaPosition)
+      addGhost(ghosts[index].currentPosition)
     }, 800)
   }
 
 
   //* Scoring for Ariel being caught by Ursula 
 
-  function arielCaught() {
+  function arielCaught(index) {
     scoreTimer = setInterval(() => {
       if ((cells[arielPosition + 1].classList.contains(ursulaClass)) ||
          (cells[arielPosition - 1].classList.contains(ursulaClass)) ||
          (cells[arielPosition + width].classList.contains(ursulaClass)) ||
          (cells[arielPosition - width].classList.contains(ursulaClass)) ||
-         (cells[ursulaPosition + 1].classList.contains(arielClass)) ||
-         (cells[ursulaPosition - 1].classList.contains(arielClass)) ||
-         (cells[ursulaPosition + width].classList.contains(arielClass)) ||
-         (cells[ursulaPosition - width].classList.contains(arielClass))) {
+         (cells[ghosts[index].currentPosition + 1].classList.contains(arielClass)) ||
+         (cells[ghosts[index].currentPosition - 1].classList.contains(arielClass)) ||
+         (cells[ghosts[index].currentPosition + width].classList.contains(arielClass)) ||
+         (cells[ghosts[index].currentPosition - width].classList.contains(arielClass))) {
         lives = lives - 1
         livesLeft.innerHTML = lives
         // clearInterval(scoreTimer)
@@ -300,7 +325,10 @@ function init() {
     }, 400)
   }
 
-  arielCaught()
+  arielCaught(0)
+  arielCaught(1)
+  arielCaught(2)
+  arielCaught(3)
 
 
   // Start, End and Scoring
@@ -309,7 +337,10 @@ function init() {
 
   function handleStart() {
     document.addEventListener('keyup', handleKeyUp)
-    moveUrsula()
+    moveGhost(0)
+    moveGhost(1)
+    moveGhost(2)
+    moveGhost(3)
     startTimer()
   }
 
