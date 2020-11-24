@@ -306,7 +306,7 @@ function init() {
 
 
 
-  //* Scoring for Ariel being caught by Ursula 
+  //* Scoring for Ariel being caught by Ghost
 
   function arielCaught(index) {
     scoreTimer = setInterval(() => {
@@ -370,7 +370,7 @@ function init() {
     } if (hasStarfish(arielPosition)) {
       score += 50
       scoreDisplay.innerHTML = score
-    } if (scoreDisplay.innerHTML >= 1760) {
+    } if (scoreDisplay.innerHTML >= 1700) {
       endOfGame()
       return scoreDisplay.innerHTML = 'Winner'
     }
