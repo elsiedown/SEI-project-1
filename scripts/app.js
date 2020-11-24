@@ -305,7 +305,7 @@ function init() {
 
   //*   Find coordinates of ghost new position
   // coordinates of ariel position
-  // if coordinate of (ghosts new position - ariel positiion) is bigger than ariel position - ghost current position - find another move
+  // if coordinate of (ariel position - ghosts new position) is bigger than (ariel position - ghost current position) - find another move
   // if coordinate of ghost new position is smaller  - move forward 
   
   function findCoordinates(index) {
@@ -314,17 +314,17 @@ function init() {
 
   function compareCoordinates(index) {
     const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
-    const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + 40 )
+    const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + 40)
     const [arielX, arielY] = findCoordinates(arielPosition)
-    console.log([currentGhostX, currentGhostY])
-    if (((newGhostX - arielX) || (newGhostY - arielY)) > ((currentGhostX - arielX) || (currentGhostY - arielY))){
+    console.log([newGhostX, newGhostY])
+    if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) > (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
       console.log('Try Another Move')
-    } else if (((newGhostX - arielX) || (newGhostY - arielY)) < ((currentGhostX - arielX) || (currentGhostY - arielY))) {
-      console.log('Move Forward')
+    } else if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))) {
+      console.log('Move Into New Position')
     }
   }
 
-  compareCoordinates((1))
+  compareCoordinates((3))
   
 
 
