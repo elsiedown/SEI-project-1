@@ -22,17 +22,16 @@
           <p>Click the Shell To Begin</p>
           <h3 class="key">Key:</h3>
               <div class="key"><img src="assets/shell.png" class="shell-image"><p> 20 points</p></div>
-                <div class="key"><img src="assets/starfish.png" class="starfish-image"><p> 50 points</p></div>
-                <div class="key"><img src="assets/water-portal.png" class="water-portal"><p>Escape Through the Water Portal to the Other Side</p></div>
-          <p><span id="your-score"></span></p>
+              <div class="key"><img src="assets/starfish.png" class="starfish-image"><p> 50 points</p></div>
+              <div class="key"><img src="assets/water-portal.png" class="water-portal"><p>Escape Through the Water Portal to the Other Side</p></div>
       </div>
       </section>
       <section class="right-side">
-        <div class="buttons">
+        <div class="controls">
           <img src="assets/shell-start.png" class="shell-button">
-          <button id="reset-button">Reset Game</button>
           <img src="assets/sebastian.png" class="sebastian">
-       </div>
+          <button id="reset-button">Reset Game</button>
+        </div>
         <div class="wood-plank">
           <p>Score: <span id="score-text"></span></p>
           <p>Lives: <span id="lives-left">3</span></p>
@@ -41,6 +40,14 @@
         <div class ="grid-wrapper">
         <div class="grid"></div>
         </div>
+      </section>
+      <section class="other-side">
+        <div class="scroll">
+          <h3>Score Board</h3>
+          <p><span id="your-score"></span></p>
+          <button id="again-button" class="try-button"><span id="try-again"></span></span></button>
+      </div>
+
       </section>
     </main>
     <footer></footer>

@@ -21,6 +21,8 @@ function init() {
   const startButton = document.querySelector('.shell-button')
   const timerDisplay = document.querySelector('#timer-display')
   const yourScore = document.querySelector('#your-score')
+  const tryAgainText = document.querySelector('#try-again')
+  const tryAgainButton = document.querySelector('#again-button')
   // const timerSecondsDisplay = document.querySelector('#seconds')
   // const timerMinutesDisplay = document.querySelector('#minutes')
 
@@ -327,7 +329,9 @@ function init() {
       } else if (lives < 1) {
         endOfGame()
         livesLeft.innerHTML = 'No Lives Left'
-        yourScore.innerHTML = `Game Over! You Scored ${score}`
+        yourScore.innerHTML = `Game Over! You Ran Out of Lives! You Scored ${score}`
+        tryAgainText.innerHTML = 'Try Again'
+        tryAgainButton.classList.add('show-button')
       }
     }, 200)
   }
@@ -369,7 +373,9 @@ function init() {
       timerDisplay.innerHTML = countSeconds
       if (countSeconds < 1 ){ 
         timerDisplay.innerHTML = 'Times Up'
-        yourScore.innerHTML = `Game Over! You Scored ${score}`
+        yourScore.innerHTML = `Game Over! You Ran Out Of Time! You Scored ${score}`
+        tryAgainText.innerHTML = 'Try Again'
+        tryAgainButton.classList.add('show-button')
         endOfGame()
         return
       } 
@@ -389,7 +395,7 @@ function init() {
       scoreDisplay.innerHTML = score
     } if (scoreDisplay.innerHTML >= 1700) {
       endOfGame()
-      return yourScore.innerHTML = `You Won! You Collected all Shells! You Scored ${score}`
+      return yourScore.innerHTML = `You Won! You Collected all the Shells! You Scored ${score}`
     }
   }
 
@@ -418,6 +424,7 @@ function init() {
   }
 
 
+
   //* Remove Default from up and down arrow key 
 
   function handleKeyDown(event) {
@@ -434,6 +441,7 @@ function init() {
   playMusicButton.addEventListener('click', handlePlaySound)
   resetButton.addEventListener('click', handleReset)
   startButton.addEventListener('click', handleStart)
+  tryAgainButton.addEventListener('click', handleReset)
   
 
 }
