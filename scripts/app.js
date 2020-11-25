@@ -50,13 +50,8 @@ function init() {
     { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 600 },
     { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 800 }
   ]
-   
-
-
-
     
-  // let moveGhostTimer = 0 
-  // let ghostTimerId = 0 
+  
   let scoreTimer = 0
   let startTimerId = null
   let countSeconds = 60
@@ -77,7 +72,9 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
     }
-    addGhostStart()
+    ghosts.forEach((ghost, index) => {
+      addGhostStart(index)
+    })
     addToGrid()
     addAriel(position)
     scoreDisplay.innerHTML = 0
@@ -204,28 +201,19 @@ function init() {
 
   //* Add Ghosts to Grid 
 
-  function addGhostStart() {
-    cells[ghosts[0].startPosition].classList.add(ursulaClass)
-    cells[ghosts[1].startPosition].classList.add(ursulaClass)
-    cells[ghosts[2].startPosition].classList.add(ursulaClass)
-    cells[ghosts[3].startPosition].classList.add(ursulaClass)
+  function addGhostStart(index) {
+    cells[ghosts[index].startPosition].classList.add(ursulaClass)
   }
 
-  function addGhost() {
-    cells[ghosts[0].currentPosition].classList.add(ursulaClass)
-    cells[ghosts[1].currentPosition].classList.add(ursulaClass)
-    cells[ghosts[2].currentPosition].classList.add(ursulaClass)
-    cells[ghosts[3].currentPosition].classList.add(ursulaClass)
+  function addGhost(index) {
+    cells[ghosts[index].currentPosition].classList.add(ursulaClass)
   }
 
 
   //* Remove Ghosts from Grid 
 
-  function removeGhost() {
-    cells[ghosts[0].currentPosition].classList.remove(ursulaClass)
-    cells[ghosts[1].currentPosition].classList.remove(ursulaClass)
-    cells[ghosts[2].currentPosition].classList.remove(ursulaClass)
-    cells[ghosts[3].currentPosition].classList.remove(ursulaClass)
+  function removeGhost(index) {
+    cells[ghosts[index].currentPosition].classList.remove(ursulaClass)
   }
 
 
@@ -251,8 +239,9 @@ function init() {
 
   function moveGhost(index, timeInterval) {
     ghosts[index].timerId = setInterval(() => {
-      removeGhost()
-      
+      ghosts.forEach((ghost, index) => {
+        removeGhost(index)
+      })
       switch (movement) {
         case 'right': // right 
           if (cells[ghosts[index].currentPosition + 1].classList.contains(wallClass)) {
@@ -293,9 +282,35 @@ function init() {
         default:
           compareCoordinates(index, ghosts[index].currentPosition++)
       } 
-      addGhost()
+      ghosts.forEach((ghost, index) => {
+        addGhost(index)
+      })
     }, timeInterval)
   }
+
+  //* Refactored code:
+
+  // const movements = [+1, -1, + width , - width]
+  // let movement = randomMovement()
+  // console.log(movement)
+
+  // function moveGhost(index, timeInterval) {
+  //   ghosts[index].timerId = setInterval(() => {
+  //     ghosts.forEach((ghost, index) => {
+  //       removeGhost(index)
+  //     })
+  //     if (cells[ghosts[index].currentPosition + movement].classList.contains(wallClass)) {
+  //       movement = randomMovement()
+  //     } else if (cells[ghosts[index].currentPosition + movement].classList.contains(ursulaClass)) {
+  //       movement = randomMovement()
+  //     } else {
+  //       compareCoordinates(index, ghosts[index].currentPosition + movement)
+  //     }
+  //     ghosts.forEach((ghost, index) => {
+  //       addGhost(index)
+  //     })
+  //   }, timeInterval)
+  // }
 
   //*   Find coordinates of ghost new position
   // coordinates of ariel position
@@ -303,8 +318,8 @@ function init() {
   // if coordinate of ghost new position is smaller  - move forward 
   // find a way of putting this into the move ghost function whereby the new ghost is adding a number instead of the number put in 
   
-  function findCoordinates(findIndex) {
-    return [findIndex % width, Math.floor(findIndex / width)]
+  function findCoordinates(index) {
+    return [index % width, Math.floor(index / width)]
   }
 
   function compareCoordinates(index, newMovement) {
@@ -312,12 +327,11 @@ function init() {
     const [newGhostX, newGhostY] = findCoordinates(newMovement)
     const [arielX, arielY] = findCoordinates(arielPosition)
     if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
-      return newMovement
+      newMovement
     } else if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))) {
       movement = randomMovement()
     }
   }
-
 
 
   //* Scoring for Ariel being caught by Ghost
@@ -342,9 +356,6 @@ function init() {
   arielCaught(1)
   arielCaught(2)
   arielCaught(3)
-
-
-
 
   // Start, End and Scoring
 
@@ -422,7 +433,6 @@ function init() {
     }
 
   }
-
 
   //* Event Listeners
 
