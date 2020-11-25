@@ -2,6 +2,8 @@
   box-sizing: border-box;
 }
 
+/* Main Section */
+
 body {
   height: 100%;
   /* display: flex; */
@@ -18,8 +20,8 @@ body {
 
 h1 { 
   color: white;
-  font-size: 80px;
-  font-family: 'Indie Flower', cursive;
+  font-size: 100px;
+  font-family: 'Nerko One', cursive;
 }
 
 .main-wrapper {
@@ -35,6 +37,8 @@ main {
   margin: 0;
 }
 
+/* Left Section */
+
 .left-side {
   display: flex;
   flex: 2;
@@ -49,6 +53,11 @@ main {
   margin-top: 40px;
 }
 
+.scroll {
+  padding: 120px;
+  
+}
+
 .starfish-image, .shell-image {
   height: 30px;
   margin: 10px;
@@ -59,17 +68,15 @@ main {
   margin: 0 5px 10px 0 ;
 }
 
-
-
-.scroll {
-  padding: 120px;
-  
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }
 
-button {
-  padding: 10px;
-  margin: 10px;
-}
+
+/* Right Section */
 
 .right-side {
   display: flex;
@@ -79,11 +86,26 @@ button {
   margin-bottom: 40px;
 }
 
-.key {
+.shell-button {
+  height: 70px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.sebastian {
+  height: 70px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.buttons {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
+}
+
+
+button {
+  padding: 10px;
+  margin: 10px;
 }
 
 .wood-plank {
@@ -99,16 +121,7 @@ button {
   background-position: center;
 }
 
-.buttons {
-  display: flex;
-}
-
-
-.score-board {
-  background-color: turquoise;
-  color: white;
-  width: 400px;
-}
+/* Grid */
 
 .grid-wrapper {
   display: flex;
@@ -117,8 +130,6 @@ button {
   align-items: center; 
   margin-bottom: 40px;
 }
-
-
 
 .grid {
   align-items: center;
@@ -138,11 +149,10 @@ button {
   height: 45px;
   width: 45px;
   background-color: turquoise;
-  /* background-image: url('../assets/shell.png');
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center; */
 }
+
+/* Grid Backgrounds */
+
 
 .grid div.ariel {
   background-image: url('../assets/ariel.png');
@@ -185,6 +195,3 @@ button {
   border: 0.2px lightgray solid;
 }
 
-.grid div.junction {
-  background-color: turquoise;
-}
