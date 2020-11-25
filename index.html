@@ -10,39 +10,41 @@
   <title>Pac-Man</title>
 </head>
 <body>
-<div class="main-wrapper">
-<header>
-  <h1>Little Mermaid Pacman</h1>
-    <button class="start-button">Start Game</button>
-    <button class="reset-button">Reset Game</button>
-    <button class="music-button">Play Music</button>
-</header>
-<main>
-    <section class="left-side">
-      <div class="scroll">
-        <h2>Instructions</h2>
-          <p>Collect all the Shells before the time runs out! Watch out for Ursula!</p>
-          <p>Key:</p>
-          <img src="assets/water-portal.png" class="water-portal"><p>Escape Through the Water Portal</p>
-          <img src="assets/shell.png" class="shell-image"><p>20 points</p>
-          <img src="assets/starfish.png" class="starfish-image"><p>50 points</p>
+  <div class="main-wrapper">
+    <header>
+      <h1>Little Mermaid Pacman</h1>
+    </header>
+    <main>
+      <section class="left-side">
+        <div class="scroll">
+          <h3>Instructions</h3>
+          <p>Make Ariel Collect all the Shells before the time runs out! Watch out for Ursula!</p>
+          <p>Click the Shell To Begin</p>
+          <h3 class="key">Key:</h3>
+              <div class="key"><img src="assets/shell.png" class="shell-image"><p> 20 points</p></div>
+                <div class="key"><img src="assets/starfish.png" class="starfish-image"><p> 50 points</p></div>
+                <div class="key"><img src="assets/water-portal.png" class="water-portal"><p>Escape Through the Water Portal to the Other Side</p></div>
           <p><span id="your-score"></span></p>
-     </div>
-    </section>
-    <section class="right-side">
-      <div class="wood-plank">
-        <p>Score: <span id="score-text"></span></p>
-        <p>Lives: <span id="lives-left">3</span></p>
-        <p>Timer: <span id="timer-display">60</span></p>
       </div>
-      <div class ="grid-wrapper">
-      <div class="grid"></div>
-      </div>
-  </section>
+      </section>
+      <section class="right-side">
+        <div class="buttons">
+          <button id="start-button">Start Game</button>
+          <button id="reset-button">Reset Game</button>
+          <button id="music-button">Play Music</button>
+       </div>
+        <div class="wood-plank">
+          <p>Score: <span id="score-text"></span></p>
+          <p>Lives: <span id="lives-left">3</span></p>
+          <p>Timer: <span id="timer-display">60</span></p>
+        </div>
+        <div class ="grid-wrapper">
+        <div class="grid"></div>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
   </div>
   <audio id="audio"></audio>
-  </div>
-</main>
-<footer></footer>
 </body>
 </html>
