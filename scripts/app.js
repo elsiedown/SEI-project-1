@@ -52,8 +52,7 @@ function init() {
   ]
    
 
-  const movements = ['right', 'left', 'up', 'down']
-  let movement = randomMovement()
+
 
     
   // let moveGhostTimer = 0 
@@ -245,11 +244,14 @@ function init() {
   // make sure she stays on the board 
   //* up left right down -- pick these - if you cant do one pick again 
   // if at starfish - move down
+  // refactor if else statement - if wall or usuala // random movement / else compare coordinates - // swap in movements as [+1, -1,  -width, +width] - if cells (cells[ghosts[index].currentPosition + 1]
 
+  const movements = ['right', 'left', 'up', 'down']
+  let movement = randomMovement()
 
   function moveGhost(index, timeInterval) {
     ghosts[index].timerId = setInterval(() => {
-      removeGhost(ghosts[index].currentPosition)
+      removeGhost()
       
       switch (movement) {
         case 'right': // right 
@@ -291,7 +293,7 @@ function init() {
         default:
           compareCoordinates(index, ghosts[index].currentPosition++)
       } 
-      addGhost(ghosts[index].currentPosition)
+      addGhost()
     }, timeInterval)
   }
 
@@ -301,23 +303,21 @@ function init() {
   // if coordinate of ghost new position is smaller  - move forward 
   // find a way of putting this into the move ghost function whereby the new ghost is adding a number instead of the number put in 
   
-  function findCoordinates(index) {
-    return [index % width, Math.floor(index / width)]
+  function findCoordinates(findIndex) {
+    return [findIndex % width, Math.floor(findIndex / width)]
   }
 
   function compareCoordinates(index, newMovement) {
     const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
-    const [newGhostX, newGhostY] = findCoordinates(ghosts[index].currentPosition + newMovement)
+    const [newGhostX, newGhostY] = findCoordinates(newMovement)
     const [arielX, arielY] = findCoordinates(arielPosition)
     if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
-      newMovement
+      return newMovement
     } else if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))) {
-      randomMovement()
+      movement = randomMovement()
     }
   }
 
- 
-  
 
 
   //* Scoring for Ariel being caught by Ghost
