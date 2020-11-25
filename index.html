@@ -13,27 +13,35 @@
 <div class="main-wrapper">
 <header>
   <h1>Little Mermaid Pacman</h1>
-  <button class="start-button">Start Game</button>
-      <button class="reset-button">Reset Game</button>
-      <button class="music-button">Play Music</button>
+    <button class="start-button">Start Game</button>
+    <button class="reset-button">Reset Game</button>
+    <button class="music-button">Play Music</button>
+</header>
+<main>
+    <section class="left-side">
+      <div class="scroll">
+        <h2>Instructions</h2>
+          <p>Collect all the Shells before the time runs out! Watch out for Ursula!</p>
+          <p>Key:</p>
+          <img src="assets/water-portal.png" class="water-portal"><p>Escape Through the Water Portal</p>
+          <img src="assets/shell.png" class="shell-image"><p>20 points</p>
+          <img src="assets/starfish.png" class="starfish-image"><p>50 points</p>
+          <p><span id="your-score"></span></p>
+     </div>
+    </section>
+    <section class="right-side">
+      <div class="wood-plank">
         <p>Score: <span id="score-text"></span></p>
         <p>Lives: <span id="lives-left">3</span></p>
         <p>Timer: <span id="timer-display">60</span></p>
-        <p><span id="your-score"></span></p>
-</header>
-<main>
-  <section class="left-side">
-      <h2>Instructions</h2>
-      <!-- <p>Collect all the Shells before the time runs out. Watch out for Ursula!</p> -->
-  </section>
-  <section class="right-side">
+      </div>
       <div class ="grid-wrapper">
       <div class="grid"></div>
       </div>
   </section>
-</div>
+  </div>
   <audio id="audio"></audio>
-</div>
+  </div>
 </main>
 <footer></footer>
 </body>

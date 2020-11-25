@@ -54,6 +54,7 @@ function init() {
   
   let scoreTimer = 0
   let startTimerId = null
+  let starfishTimer = null
   let countSeconds = 60
   // let countMinutes = 2
   let score = 0 
@@ -288,29 +289,6 @@ function init() {
     }, timeInterval)
   }
 
-  //* Refactored code:
-
-  // const movements = [+1, -1, + width , - width]
-  // let movement = randomMovement()
-  // console.log(movement)
-
-  // function moveGhost(index, timeInterval) {
-  //   ghosts[index].timerId = setInterval(() => {
-  //     ghosts.forEach((ghost, index) => {
-  //       removeGhost(index)
-  //     })
-  //     if (cells[ghosts[index].currentPosition + movement].classList.contains(wallClass)) {
-  //       movement = randomMovement()
-  //     } else if (cells[ghosts[index].currentPosition + movement].classList.contains(ursulaClass)) {
-  //       movement = randomMovement()
-  //     } else {
-  //       compareCoordinates(index, ghosts[index].currentPosition + movement)
-  //     }
-  //     ghosts.forEach((ghost, index) => {
-  //       addGhost(index)
-  //     })
-  //   }, timeInterval)
-  // }
 
   //*   Find coordinates of ghost new position
   // coordinates of ariel position
@@ -326,10 +304,12 @@ function init() {
     const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
     const [newGhostX, newGhostY] = findCoordinates(newMovement)
     const [arielX, arielY] = findCoordinates(arielPosition)
-    if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))){
+    if ((Math.abs(newGhostX - arielX) || Math.abs(newGhostY - arielY)) <= (Math.abs(currentGhostX - arielX) || Math.abs(currentGhostY - arielY))){
+      console.log('Inside if')
       newMovement
-    } else if ((Math.abs(arielX - newGhostX) || Math.abs(arielY - newGhostY)) < (Math.abs(arielX - currentGhostX) || Math.abs(arielY - currentGhostY))) {
+    } else if ((Math.abs(newGhostX - arielX) || Math.abs(newGhostY - arielY)) >= (Math.abs(currentGhostX - arielX) || Math.abs(currentGhostY - arielY))) {
       movement = randomMovement()
+      console.log('Inside else')
     }
   }
 
@@ -352,10 +332,23 @@ function init() {
     }, 200)
   }
 
+
   arielCaught(0)
   arielCaught(1)
   arielCaught(2)
   arielCaught(3)
+
+  // when ariel eats starfish - ghost movement stop in that position // or move them back to the corner 
+
+  // function eatStarfish() {
+  //     ghosts[0].currentPosition = 88
+  //     ghosts[1].currentPosition = 88
+  //     ghosts[2].currentPosition = 88
+  //     ghosts[3].currentPosition = 88
+  //   }
+  
+
+  
 
   // Start, End and Scoring
 
