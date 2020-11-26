@@ -67,8 +67,13 @@ main {
   justify-content: center;
 }
 
-.starfish-image, .shell-image {
+.shell-image {
   height: 30px;
+  margin: 10px;
+}
+
+.starfish-image {
+  height: 50px;
   margin: 10px;
 }
 
@@ -108,7 +113,7 @@ main {
   margin: 10px;
 }
 
-.music-bubbles {
+.bubbles {
   background-image: url("https://media.giphy.com/media/TfRM2BSvUJKigGOeYt/giphy.gif");
   background-repeat: no-repeat;
   background-size: contain;
@@ -207,7 +212,8 @@ button {
 
 
 .grid div.ariel {
-  background-image: url("https://media.giphy.com/media/3o7bu4Im1lrVauspBC/giphy.gif");
+  /* background-image: url("https://media.giphy.com/media/3o7bu4Im1lrVauspBC/giphy.gif"); */
+  background-image: url('../assets/ariel.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-color: none;
@@ -254,5 +260,17 @@ footer {
   color: white;
   font-family: 'Nerko One', cursive;
   font-size: 20px;
+}
+
+@media only screen and (max-width: 880px) {
+  main {
+    flex-direction: column;
+  }
+  section:first-child {
+    display: none;
+  }
+  section:last-child {
+    display: none;
+  }
 }
 

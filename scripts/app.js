@@ -13,17 +13,22 @@ function init() {
   //* Elements
 
   const grid = document.querySelector('.grid')
-  const scoreDisplay = document.querySelector('#score-text')
-  const livesLeft = document.querySelector('#lives-left')
   const audio = document.querySelector('#audio')
+
+
   const playMusicButton = document.querySelector('.sebastian-button')
   const resetButton = document.querySelector('.reset-button')
   const startButton = document.querySelector('.shell-button')
+  const bubbleSection = document.querySelector('.bubble-class')
+
   const timerDisplay = document.querySelector('#timer-display')
+  const scoreDisplay = document.querySelector('#score-text')
+  const livesLeft = document.querySelector('#lives-left')
+  
   const yourScore = document.querySelector('#your-score')
   const tryAgainText = document.querySelector('#try-again-text')
   const tryAgainButton = document.querySelector('#try-again-button')
-  const musicSection = document.querySelector('.music-class')
+  
   // const timerSecondsDisplay = document.querySelector('#seconds')
   // const timerMinutesDisplay = document.querySelector('#minutes')
 
@@ -47,6 +52,15 @@ function init() {
   const shells = []
   const possibleMoves = []
 
+  let scoreTimer = 0
+  let startTimerId = null
+  // let starfishTimer = null
+  let countSeconds = 60
+  // let countMinutes = 2
+  let score = 0 
+  let lives = 3
+  let arielPosition = 84
+
   let ghosts = [
     { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 400 },
     { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 300 },
@@ -55,14 +69,7 @@ function init() {
   ]
     
   
-  let scoreTimer = 0
-  let startTimerId = null
-  let starfishTimer = null
-  let countSeconds = 60
-  // let countMinutes = 2
-  let score = 0 
-  let lives = 3
-  let arielPosition = 84
+
 
 
   //* Functions
@@ -168,9 +175,6 @@ function init() {
 
   //* Move Ariel Around the Board
 
-  function handleKeyEnd(){
-    removeAriel(arielPosition)
-  }
 
   function handleKeyUp(event) {
     removeAriel(arielPosition)
@@ -364,6 +368,9 @@ function init() {
   //* Start Game Function
 
   function handleStart() {
+    // audio.src = './assets/Under the Sea.mp3'
+    // audio.play()
+    bubbleSection.classList.add('bubbles')
     document.addEventListener('keyup', handleKeyUp)
     ghosts.forEach((ghost, index) => {
       moveGhost(index, ghost.timeInterval)
@@ -414,16 +421,28 @@ function init() {
     document.addEventListener('keydown', handleKeyEnd)
     document.addEventListener('keyup', handleKeyEnd)
   }
+
+  //* Stop Down Arrow Working
+
+  function handleKeyEnd(){
+    removeAriel(arielPosition)
+  }
   
   // Other Effects
 
   //* Play Music 
 
   function handlePlaySound() {
-    audio.src = './assets/Under the Sea.mp3'
-    audio.play()
-    musicSection.classList.add('music-bubbles')
+    if (audio.src) {
+      audio.pause()
+    } else {
+      audio.src = './assets/Under the Sea.mp3'
+      audio.play()
+    }
+    bubbleSection.classList.add('bubbles')
   }
+
+
   
   //* Reset Game
 
@@ -432,14 +451,12 @@ function init() {
   }
 
 
-
   //* Remove Default from up and down arrow key 
 
   function handleKeyDown(event) {
     if (event.which === 38 || event.which === 40) {
       event.preventDefault()
     }
-
   }
 
   //* Event Listeners
