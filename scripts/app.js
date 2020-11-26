@@ -62,10 +62,10 @@ function init() {
   let arielPosition = 84
 
   let ghosts = [
-    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 400 },
-    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 300 },
+    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 300 },
+    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 400 },
     { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 600 },
-    { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 800 }
+    { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 500 }
   ]
     
   
@@ -206,7 +206,7 @@ function init() {
         else if (vertical < width - 2) arielPosition += width
         break
       default:
-        console.log('Invalid Key') //* remove for prompt window 
+        console.log('Invalid Key')
     } 
     addAriel(arielPosition)
   }
@@ -316,11 +316,9 @@ function init() {
     const [newGhostX, newGhostY] = findCoordinates(newMovement)
     const [arielX, arielY] = findCoordinates(arielPosition)
     if ((Math.abs(newGhostX - arielX) || Math.abs(newGhostY - arielY)) <= (Math.abs(currentGhostX - arielX) || Math.abs(currentGhostY - arielY))){
-      console.log('Inside if')
       newMovement
     } else if ((Math.abs(newGhostX - arielX) || Math.abs(newGhostY - arielY)) >= (Math.abs(currentGhostX - arielX) || Math.abs(currentGhostY - arielY))) {
       movement = randomMovement()
-      console.log('Inside else')
     }
   }
 
@@ -329,7 +327,7 @@ function init() {
 
   function arielCaught(index) {
     scoreTimer = setInterval(() => {
-      if (cells[ghosts[index].currentPosition].classList.contains(arielClass)) {
+      if ((cells[ghosts[index].currentPosition].classList.contains(arielClass)) || (cells[arielPosition].classList.contains(ursulaClass))) {
         removeAriel(arielPosition)
         arielPosition = 84
         addAriel(arielPosition)
@@ -407,7 +405,9 @@ function init() {
       scoreDisplay.innerHTML = score
     } if (scoreDisplay.innerHTML >= 1700) {
       endOfGame()
-      return yourScore.innerHTML = `You Won! You Collected all the Shells! You Scored ${score}`
+      yourScore.innerHTML = `You Won! You Collected all the Shells! You Scored ${score}`
+      tryAgainText.innerHTML = 'Have Another Go'
+      tryAgainButton.classList.add('show-button')
     }
   }
 
@@ -450,6 +450,10 @@ function init() {
     window.location.reload()
   }
 
+  function handleTryAgain() {
+    window.location.reload()
+  }
+
 
   //* Remove Default from up and down arrow key 
 
@@ -465,7 +469,7 @@ function init() {
   playMusicButton.addEventListener('click', handlePlaySound)
   resetButton.addEventListener('click', handleReset)
   startButton.addEventListener('click', handleStart)
-  tryAgainButton.addEventListener('click', handleReset)
+  tryAgainButton.addEventListener('click', handleTryAgain)
   
 
 }
