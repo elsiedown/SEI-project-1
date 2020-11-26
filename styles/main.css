@@ -30,6 +30,10 @@ h1 {
   font-family: 'Nerko One', cursive;
 }
 
+h2 {
+  font-size: 23px;
+}
+
 main {
   /* flex-grow: 1; */
   display: flex;
@@ -46,10 +50,10 @@ main {
   background-image: url('../assets/scroll.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 420px;
+  background-size: 420px 530px;
   background-color: none;
   margin-top: 160px;
-  font-size: 14px;
+  font-size: 15px;
   padding: 80px;
 }
 
@@ -63,6 +67,7 @@ main {
 .key {
   display: flex;
   justify-content: center;
+  margin-top: 0;
 }
 
 .shell-image {
@@ -100,13 +105,13 @@ main {
 }
 
 .shell-button {
-  height: 50px;
+  height: 80px;
   margin: 10px;
   cursor: pointer;
 }
 
 .sebastian-button {
-  height: 50px;
+  height: 80px;
   cursor: pointer;
   margin: 10px;
 }
@@ -119,7 +124,7 @@ main {
 }
 
 .reset-button {
-  height: 50px;
+  height: 80px;
   cursor: pointer;
   margin: 10px;
 }
@@ -168,7 +173,7 @@ button {
   background-image: url('../assets/scroll.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 420px;
+  background-size: 420px 530px;
   background-color: none;
   margin-top: 160px;
   font-size: 14px;

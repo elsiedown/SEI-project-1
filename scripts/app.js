@@ -458,7 +458,7 @@ function init() {
   //* Remove Default from up and down arrow key 
 
   function handleKeyDown(event) {
-    if (event.which === 38 || event.which === 40) {
+    if (event.which === 38 || event.which === 40 || event.which === 37 || event.which === 39) {
       event.preventDefault()
     }
   }
