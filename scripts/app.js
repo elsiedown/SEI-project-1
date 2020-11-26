@@ -167,6 +167,10 @@ function init() {
 
   //* Move Ariel Around the Board
 
+  function handleKeyEnd(){
+    removeAriel(arielPosition)
+  }
+
   function handleKeyUp(event) {
     removeAriel(arielPosition)
 
@@ -406,6 +410,8 @@ function init() {
     clearInterval(startTimerId)
     clearInterval(scoreTimer)
     removeAriel(arielPosition)
+    document.addEventListener('keydown', handleKeyEnd)
+    document.addEventListener('keyup', handleKeyEnd)
   }
   
   // Other Effects
@@ -435,7 +441,6 @@ function init() {
   }
 
   //* Event Listeners
-
 
   document.addEventListener('keydown', handleKeyDown)
   playMusicButton.addEventListener('click', handlePlaySound)
