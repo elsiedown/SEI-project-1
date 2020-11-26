@@ -148,6 +148,7 @@ button {
 
 .show-button {
   background-color: turquoise;
+  border: 2px white solid;
   color: white;
   display: inline;
   padding: 10px;

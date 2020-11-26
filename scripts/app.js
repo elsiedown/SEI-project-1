@@ -366,8 +366,8 @@ function init() {
   //* Start Game Function
 
   function handleStart() {
-    // audio.src = './assets/Under the Sea.mp3'
-    // audio.play()
+    audio.src = './assets/Under the Sea.mp3'
+    audio.play()
     bubbleSection.classList.add('bubbles')
     document.addEventListener('keyup', handleKeyUp)
     ghosts.forEach((ghost, index) => {
@@ -398,8 +398,6 @@ function init() {
     if (hasShell(arielPosition)) {
       score += 20
       scoreDisplay.innerHTML = score
-      // audio.src = './assets/bubble.mp3'
-      // audio.play()
     } if (hasStarfish(arielPosition)) {
       score += 50
       scoreDisplay.innerHTML = score
@@ -414,6 +412,7 @@ function init() {
   //* Function for Game Complete
 
   function endOfGame() {
+    audio.pause()
     ghosts.forEach(ghost => clearInterval(ghost.timerId))
     clearInterval(startTimerId)
     clearInterval(scoreTimer)
@@ -432,12 +431,12 @@ function init() {
 
   //* Play Music 
 
-  function handlePlaySound() {
-    if (audio.src) {
-      audio.pause()
-    } else {
+  function togglePlay() {
+    if (audio.paused) {
       audio.src = './assets/Under the Sea.mp3'
       audio.play()
+    } else {
+      audio.pause()
     }
     bubbleSection.classList.add('bubbles')
   }
@@ -466,7 +465,7 @@ function init() {
   //* Event Listeners
 
   document.addEventListener('keydown', handleKeyDown)
-  playMusicButton.addEventListener('click', handlePlaySound)
+  playMusicButton.addEventListener('click', togglePlay)
   resetButton.addEventListener('click', handleReset)
   startButton.addEventListener('click', handleStart)
   tryAgainButton.addEventListener('click', handleTryAgain)
