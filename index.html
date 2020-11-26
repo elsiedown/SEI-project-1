@@ -16,21 +16,30 @@
     </header>
     <main>
       <section class="left-side">
-        <div class="scroll">
-          <h3>Instructions</h3>
-          <p>Make Ariel Collect all the Shells before the time runs out! Watch out for Ursula!</p>
+        <div class="scroll-text">
+          <h4>Instructions</h4>
+          <p>Ariel must collect all the Shells before the time runs out! Watch out for Ursula!</p>
           <p>Click the Shell To Begin</p>
-          <h3 class="key">Key:</h3>
+          <h4 class="key">Key:</h4>
               <div class="key"><img src="assets/shell.png" class="shell-image"><p> 20 points</p></div>
               <div class="key"><img src="assets/starfish.png" class="starfish-image"><p> 50 points</p></div>
               <div class="key"><img src="assets/water-portal.png" class="water-portal"><p>Escape Through the Water Portal to the Other Side</p></div>
-      </div>
+        </div>
       </section>
-      <section class="right-side">
+      <section class="middle-section">
         <div class="controls">
-          <img src="assets/shell-start.png" class="shell-button">
-          <img src="assets/sebastian.png" class="sebastian">
-          <button id="reset-button">Reset Game</button>
+          <div>
+            <img src="assets/shell-start.png" class="shell-button">
+            <p>Start<br>Game</p>
+          </div>
+          <div>
+            <img src="assets/sebastian.png" class="sebastian-button">
+            <p>Play<br>Music</p>
+          </div>
+          <div>
+            <img src="assets/starfish.png" class="reset-button">
+            <p>Reset<br>Game</p>
+          </div>
         </div>
         <div class="wood-plank">
           <p>Score: <span id="score-text"></span></p>
@@ -41,12 +50,12 @@
         <div class="grid"></div>
         </div>
       </section>
-      <section class="other-side">
+      <section class="right-side">
         <div class="scroll">
           <h3>Score Board</h3>
           <p><span id="your-score"></span></p>
-          <button id="again-button" class="try-button"><span id="try-again"></span></span></button>
-      </div>
+          <button id="try-again-button" class="try-again-button"><span id="try-again-text"></span></span></button>
+        </div>
       </section>
     </main>
     <footer>

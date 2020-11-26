@@ -5,18 +5,23 @@
 /* Main Section */
 
 body {
-  height: 100%;
-  /* display: flex; */
+  text-align: center;
+  color: black;
+  font-size:14px;display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
   background-image: url('../assets/underwater.jpeg');
   background-position: center;
   background-size: cover;
-  text-align: center;
-  color: black;
-  font-size: 18px;
+  font-family:'Nerko One', cursive;
 } 
+
+.main-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 h1 { 
   color: white;
@@ -24,15 +29,8 @@ h1 {
   font-family: 'Nerko One', cursive;
 }
 
-.main-wrapper {
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  flex-direction: column;
-}
-
 main {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   display: flex;
   margin: 0;
 }
@@ -41,21 +39,31 @@ main {
 
 .left-side {
   display: flex;
-  flex: 2;
-  /* flex-direction: column; */
+  flex: 1;
   align-items: center;
   justify-content: center;
   background-image: url('../assets/scroll.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 500px;
+  background-size: 390px;
   background-color: none;
   margin-top: 40px;
+  font-size: 14px;
+  padding: 80px;
 }
 
-.scroll {
-  padding: 120px;
-  
+.scroll-text {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .starfish-image, .shell-image {
@@ -68,32 +76,39 @@ main {
   margin: 0 5px 10px 0 ;
 }
 
-.key {
+
+
+/* Middle Section */
+
+.middle-section {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-
-
-/* Right Section */
-
-.right-side {
-  display: flex;
-  flex: 2;
   align-items: center;
   flex-direction: column;
+  flex: 2;
   margin-bottom: 40px;
+  font-family:'Nerko One', cursive;
+  font-size: 20px;
+}
+
+.controls {
+  display: flex;
+  color: white;
 }
 
 .shell-button {
-  height: 70px;
+  height: 50px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.sebastian-button {
+  height: 50px;
   cursor: pointer;
   margin: 10px;
 }
 
-.sebastian {
-  height: 70px;
+.reset-button {
+  height: 50px;
   cursor: pointer;
   margin: 10px;
 }
@@ -102,13 +117,12 @@ main {
   display: flex;
 }
 
-
 button {
   padding: 10px;
   margin: 10px;
 }
 
-.try-button {
+.try-again-button {
   background-color: pink;
   display: none;
 }
@@ -126,23 +140,28 @@ button {
   height: 150px;
   background-image: url('../assets/wood-plank.png');
   background-size: 500px;
-  margin: 0;
   background-repeat: no-repeat;
   background-position: center;
+  margin: 0;
 }
 
-.other-side {
+
+/* /Right Side */
+
+
+.right-side {
   display: flex;
-  flex: 2;
-  /* flex-direction: column; */
+  flex: 1;
   align-items: center;
   justify-content: center;
   background-image: url('../assets/scroll.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 500px;
+  background-size: 390px;
   background-color: none;
   margin-top: 40px;
+  font-size: 14px;
+  padding: 80px;
 }
 
 
@@ -220,7 +239,11 @@ button {
   border: 0.2px lightgray solid;
 }
 
+/* /Footer */
+
 footer {
   color: white;
+  font-family: 'Nerko One', cursive;
+  font-size: 20px;
 }
 
