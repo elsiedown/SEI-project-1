@@ -108,6 +108,13 @@ main {
   margin: 10px;
 }
 
+.music-bubbles {
+  background-image: url("https://media.giphy.com/media/TfRM2BSvUJKigGOeYt/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: none;
+}
+
 .reset-button {
   height: 50px;
   cursor: pointer;

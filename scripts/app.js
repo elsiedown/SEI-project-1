@@ -23,6 +23,7 @@ function init() {
   const yourScore = document.querySelector('#your-score')
   const tryAgainText = document.querySelector('#try-again-text')
   const tryAgainButton = document.querySelector('#try-again-button')
+  const musicSection = document.querySelector('.music-class')
   // const timerSecondsDisplay = document.querySelector('#seconds')
   // const timerMinutesDisplay = document.querySelector('#minutes')
 
@@ -421,6 +422,7 @@ function init() {
   function handlePlaySound() {
     audio.src = './assets/Under the Sea.mp3'
     audio.play()
+    musicSection.classList.add('music-bubbles')
   }
   
   //* Reset Game
