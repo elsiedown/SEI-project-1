@@ -200,7 +200,7 @@ button {
 
 
 .grid div.ariel {
-  background-image: url('../assets/ariel.png');
+  background-image: url("https://media.giphy.com/media/3o7bu4Im1lrVauspBC/giphy.gif");
   background-repeat: no-repeat;
   background-size: contain;
   background-color: none;
@@ -214,10 +214,11 @@ button {
 }
 
 .grid div.starfish {
+  background-image: url("https://media.giphy.com/media/eBb20laqXRFsOaaXcV/giphy.gif");
   background-repeat: no-repeat;
-  background-size: 50%;
   background-position: center;
-  background-image: url('../assets/starfish.png')
+  background-size: 80%;
+
 }
 
 .grid div.whirlpool {
