@@ -13,7 +13,7 @@ function init() {
   //* Elements
 
   const grid = document.querySelector('.grid')
-  const audio = document.querySelector('#audio')
+  const startAudio = document.querySelector('#start-audio')
 
 
   const playMusicButton = document.querySelector('.sebastian-button')
@@ -31,6 +31,8 @@ function init() {
   
   // const timerSecondsDisplay = document.querySelector('#seconds')
   // const timerMinutesDisplay = document.querySelector('#minutes')
+
+  const ursulaSound = new Audio('../assets/ursula-sound.mp3')
 
 
   const arielClass = 'ariel'
@@ -336,7 +338,8 @@ function init() {
       } else if (lives < 1) {
         endOfGame()
         livesLeft.innerHTML = 'No Lives Left'
-        yourScore.innerHTML = `Game Over! You Ran Out of Lives! You Scored ${score}`
+        yourScore.innerHTML = `Oh No! Ursula Caught You! Game Over! You Scored ${score}`
+        ursulaSound.play()
         tryAgainText.innerHTML = 'Try Again'
         tryAgainButton.classList.add('show-button')
       }
@@ -366,8 +369,8 @@ function init() {
   //* Start Game Function
 
   function handleStart() {
-    audio.src = './assets/Under the Sea.mp3'
-    audio.play()
+    startAudio.src = './assets/Under the Sea.mp3'
+    startAudio.play()
     bubbleSection.classList.add('bubbles')
     document.addEventListener('keyup', handleKeyUp)
     ghosts.forEach((ghost, index) => {
@@ -412,7 +415,7 @@ function init() {
   //* Function for Game Complete
 
   function endOfGame() {
-    audio.pause()
+    startAudio.pause()
     ghosts.forEach(ghost => clearInterval(ghost.timerId))
     clearInterval(startTimerId)
     clearInterval(scoreTimer)
@@ -432,11 +435,11 @@ function init() {
   //* Play Music 
 
   function togglePlay() {
-    if (audio.paused) {
-      audio.src = './assets/Under the Sea.mp3'
-      audio.play()
+    if (startAudio.paused) {
+      startAudio.src = './assets/Under the Sea.mp3'
+      startAudio.play()
     } else {
-      audio.pause()
+      startAudio.pause()
     }
     bubbleSection.classList.add('bubbles')
   }
