@@ -82,7 +82,7 @@ main {
 
 .water-portal {
   height: 30px;
-  margin: 0 5px 10px 0 ;
+  margin: 5px 0px 10px 0 ;
 }
 
 
@@ -139,13 +139,20 @@ button {
 }
 
 .try-again-button {
-  background-color: pink;
   display: none;
+  padding: 10px;
+  margin: 10px;
+  font-family: 'Nerko One', cursive;
+  font-size: 15px;
 }
 
 .show-button {
-  background-color: pink;
+  background-color: turquoise;
+  color: white;
   display: inline;
+  padding: 10px;
+  margin: 10px;
+  font-family: 'Nerko One', cursive;
 }
 
 .wood-plank {
@@ -184,7 +191,10 @@ button {
   height: 350px;
   width: 270px;
   flex-direction: column;
-  font-size: 25px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
