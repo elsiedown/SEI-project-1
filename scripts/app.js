@@ -5,6 +5,8 @@ function init() {
   // Grid
 
   const grid = document.querySelector('.grid')
+  const controls = document.querySelector('.controls')
+  const arrows = document.querySelector('.arrows-section')
 
   // Audio
 
@@ -61,7 +63,7 @@ function init() {
   let arielPosition = 84
 
   let ghosts = [
-    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 200 },
+    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 300 },
     { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 300 },
     { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 400 },
     { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 500 }
@@ -325,6 +327,7 @@ function init() {
         livesLeft.innerHTML = 'No Lives Left'
         yourScore.innerHTML = `Oh No! Ursula Caught You! Game Over! You Scored ${score}`
         ursulaSound.play()
+        arrows.classList.add('remove-arrows')
         tryAgainText.innerHTML = 'Try Again'
         tryAgainButton.classList.add('show-button')
       }
@@ -361,6 +364,7 @@ function init() {
         timesUpSound.play()
         timerDisplay.innerHTML = 'Times Up'
         yourScore.innerHTML = `Game Over! You Ran Out Of Time! You Scored ${score}`
+        arrows.classList.add('remove-arrows')
         tryAgainText.innerHTML = 'Try Again'
         tryAgainButton.classList.add('show-button')
         return
@@ -383,6 +387,7 @@ function init() {
       yourScore.innerHTML = `You Won! You Collected all the Shells! You Scored ${score}`
       tryAgainText.innerHTML = 'Have Another Go'
       tryAgainButton.classList.add('show-button')
+      arrows.classList.add('remove-arrows')
     }
   }
 
@@ -426,6 +431,7 @@ function init() {
 
   function handleTryAgain() {
     window.location.reload()
+    controls.scrollIntoView()
   }
 
   //* Remove Default from up and down arrow key 

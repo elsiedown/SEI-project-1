@@ -63,9 +63,20 @@ main {
   flex-direction: column;
 }
 
-div.scroll-text-one p:nth-child(3) {
+div.scroll-text-one p:nth-child(3), div.scroll-text-one p:nth-child(2)  {
   font-size: 16px;
-  div.scroll-text-one p:nth-child(2) 
+}
+
+.arrows-section {
+  margin-top: 90px;
+}
+
+.arrows {
+  height: 60px;
+}
+
+.remove-arrows {
+  display: none;
 }
 
 .key {
