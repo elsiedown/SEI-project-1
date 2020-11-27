@@ -10,19 +10,28 @@ function init() {
   
   
 
-  //* Elements
+  //* Elements:
+
+  // Grid
 
   const grid = document.querySelector('.grid')
+
+  // Audio
+
   const startAudio = document.querySelector('#start-audio')
   const ursulaSound = new Audio('assets/ursula-sound.mp3')
   const timesUpSound = new Audio('assets/times-up.mp3')
   const winnerSound = new Audio('assets/kiddo-we-did-it.mp3')
+  const gaspSound = new Audio('assets/gasp.wav')
   
+  // Buttons
 
   const playMusicButton = document.querySelector('.sebastian-button')
   const resetButton = document.querySelector('.reset-button')
   const startButton = document.querySelector('.shell-button')
   const bubbleSection = document.querySelector('.bubble-class')
+
+  // Scoring and Game Over
 
   const timerDisplay = document.querySelector('#timer-display')
   const scoreDisplay = document.querySelector('#score-text')
@@ -32,11 +41,7 @@ function init() {
   const tryAgainText = document.querySelector('#try-again-text')
   const tryAgainButton = document.querySelector('#try-again-button')
   
-  // const timerSecondsDisplay = document.querySelector('#seconds')
-  // const timerMinutesDisplay = document.querySelector('#minutes')
-
-  
-
+  // Classes
 
   const arielClass = 'ariel'
   const ursulaClass = 'ursula'
@@ -46,7 +51,7 @@ function init() {
   const whirlpoolClass = 'whirlpool'
 
 
-  //* Variables
+  //* Variables:
 
   const width = 13
   const gridCellCount = width * width
@@ -59,9 +64,8 @@ function init() {
 
   let scoreTimer = 0
   let startTimerId = null
-  // let starfishTimer = null
+
   let countSeconds = 60
-  // let countMinutes = 2
   let score = 0 
   let lives = 3
   let arielPosition = 84
@@ -243,13 +247,7 @@ function init() {
   
 
   //* Move Ursula Around Board
-  //* Move Ursula Around the Board 
-  //* every second or less - move ursula - set an interval 
-  // from her position to the left / right
-  // make sure she stays on the board 
-  //* up left right down -- pick these - if you cant do one pick again 
-  // if at starfish - move down
-  // refactor if else statement - if wall or usuala // random movement / else compare coordinates - // swap in movements as [+1, -1,  -width, +width] - if cells (cells[ghosts[index].currentPosition + 1]
+  
 
   const movements = ['right', 'left', 'up', 'down']
   let movement = randomMovement()
@@ -307,10 +305,6 @@ function init() {
 
 
   //*   Find coordinates of ghost new position
-  // coordinates of ariel position
-  // if coordinate of (ariel position - ghosts new position) is bigger than (ariel position - ghost current position) - find another move
-  // if coordinate of ghost new position is smaller  - move forward 
-  // find a way of putting this into the move ghost function whereby the new ghost is adding a number instead of the number put in 
   
   function findCoordinates(index) {
     return [index % width, Math.floor(index / width)]
@@ -333,6 +327,7 @@ function init() {
   function arielCaught(index) {
     scoreTimer = setInterval(() => {
       if ((cells[ghosts[index].currentPosition].classList.contains(arielClass)) || (cells[arielPosition].classList.contains(ursulaClass))) {
+        gaspSound.play()
         removeAriel(arielPosition)
         arielPosition = 84
         addAriel(arielPosition)
@@ -348,7 +343,6 @@ function init() {
       }
     }, 200)
   }
-
 
   arielCaught(0)
   arielCaught(1)
@@ -399,7 +393,7 @@ function init() {
     }, 1000)
   }
 
-  //* Function for score:
+  //* Function for Update score:
 
   function updateScore() {
     if (hasShell(arielPosition)) {
@@ -417,7 +411,7 @@ function init() {
     }
   }
 
-  //* Function for Game Complete
+  //* Function for End of Game
 
   function endOfGame() {
     startAudio.pause()
@@ -448,7 +442,6 @@ function init() {
     }
     bubbleSection.classList.add('bubbles')
   }
-
 
   
   //* Reset Game
