@@ -308,7 +308,6 @@ function init() {
     }
   }
 
-
   //* Scoring for Ariel being caught by Ghost
 
   function arielCaught(index) {
@@ -328,7 +327,7 @@ function init() {
         tryAgainText.innerHTML = 'Try Again'
         tryAgainButton.classList.add('show-button')
       }
-    }, 200)
+    }, 10)
   }
 
   arielCaught(0)

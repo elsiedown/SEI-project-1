@@ -63,6 +63,11 @@ main {
   flex-direction: column;
 }
 
+div.scroll-text-one p:nth-child(3) {
+  font-size: 16px;
+  div.scroll-text-one p:nth-child(2) 
+}
+
 .key {
   display: flex;
   justify-content: center;
@@ -137,6 +142,7 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   margin: 0 auto;
+  color: #3F250B;
 }
 
 
