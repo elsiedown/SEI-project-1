@@ -19,10 +19,10 @@ function init() {
   // Audio
 
   const startAudio = document.querySelector('#start-audio')
-  const ursulaSound = new Audio('assets/ursula-sound.mp3')
-  const timesUpSound = new Audio('assets/times-up.mp3')
-  const winnerSound = new Audio('assets/kiddo-we-did-it.mp3')
-  const gaspSound = new Audio('assets/gasp.wav')
+  const ursulaSound = new Audio('./assets/ursula-sound.mp3')
+  const timesUpSound = new Audio('./assets/times-up.mp3')
+  const winnerSound = new Audio('./assets/kiddo-we-did-it.mp3')
+  const gaspSound = new Audio('./assets/gasp.wav')
   
   // Buttons
 

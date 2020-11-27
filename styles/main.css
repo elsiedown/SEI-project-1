@@ -6,7 +6,7 @@
 
 body {
   text-align: center;
-  color: black;
+  color: #3F250B;
   font-size:14px;display: flex;
   justify-content: center;
   align-items: center;
@@ -184,7 +184,6 @@ button {
   background-size: 420px 530px;
   background-color: none;
   margin-top: 160px;
-  font-size: 14px;
   padding: 80px;
 }
 
@@ -196,6 +195,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 22px;
+}
+
+div.scroll-text-two h2 {
+  font-size: 30px;
 }
 
 
