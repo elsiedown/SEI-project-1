@@ -238,6 +238,7 @@ function init() {
   let movement = randomMovement()
 
   function moveGhost(index, timeInterval) {
+    if (ghosts[index].timerId) return
     ghosts[index].timerId = setInterval(() => {
       ghosts.forEach((ghost, index) => {
         removeGhost(index)
@@ -330,10 +331,10 @@ function init() {
     }, 10)
   }
 
-  arielCaught(0)
-  arielCaught(1)
-  arielCaught(2)
-  arielCaught(3)
+  ghosts.forEach((ghost, index) => {
+    arielCaught(index)
+  })
+
 
 
   // Start, End and Scoring

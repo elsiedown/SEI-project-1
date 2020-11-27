@@ -265,7 +265,7 @@ button {
   background-image: url('../assets/ursula-2.png');
   background-color: turquoise;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 90%;
   background-color: none;
 }
 
