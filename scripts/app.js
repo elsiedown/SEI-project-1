@@ -335,13 +335,12 @@ function init() {
     arielCaught(index)
   })
 
-
-
   // Start, End and Scoring
 
   //* Start Game Function
 
   function handleStart() {
+    grid.scrollIntoView()
     startAudio.src = './assets/Under the Sea.mp3'
     startAudio.play()
     bubbleSection.classList.add('bubbles')
@@ -419,7 +418,6 @@ function init() {
     bubbleSection.classList.add('bubbles')
   }
 
-  
   //* Reset Game Functions
 
   function handleReset() {
@@ -429,7 +427,6 @@ function init() {
   function handleTryAgain() {
     window.location.reload()
   }
-
 
   //* Remove Default from up and down arrow key 
 
