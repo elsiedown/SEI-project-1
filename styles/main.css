@@ -5,29 +5,28 @@
 /* Main Section */
 
 body {
+  font-family:'Nerko One', cursive;
+  font-size: 14px;
   text-align: center;
   color: #3F250B;
-  font-size:14px;display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
   background-image: url('../assets/underwater.jpeg');
   background-position: center;
   background-size: cover;
-  font-family:'Nerko One', cursive;
+  margin: 0;
 } 
 
 .main-wrapper {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: column;
 }
 
 h1 { 
   color: white;
   font-size: 100px;
-  font-family: 'Nerko One', cursive;
 }
 
 h2 {
@@ -80,11 +79,10 @@ main {
   margin: 10px;
 }
 
-.water-portal {
+.water-portal-image {
   height: 30px;
   margin: 5px 0px 10px 0 ;
 }
-
 
 
 /* Middle Section */
@@ -95,7 +93,6 @@ main {
   flex-direction: column;
   flex: 2;
   margin-bottom: 40px;
-  font-family:'Nerko One', cursive;
   font-size: 20px;
 }
 
@@ -116,44 +113,17 @@ main {
   margin: 10px;
 }
 
-.bubbles {
-  background-image: url("https://media.giphy.com/media/TfRM2BSvUJKigGOeYt/giphy.gif");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: none;
-}
-
 .reset-button {
   height: 80px;
   cursor: pointer;
   margin: 10px;
 }
 
-.controls {
-  display: flex;
-}
-
-button {
-  padding: 10px;
-  margin: 10px;
-}
-
-.try-again-button {
-  display: none;
-  padding: 10px;
-  margin: 10px;
-  font-family: 'Nerko One', cursive;
-  font-size: 15px;
-}
-
-.show-button {
-  background-color: turquoise;
-  border: 2px white solid;
-  color: white;
-  display: inline;
-  padding: 10px;
-  margin: 10px;
-  font-family: 'Nerko One', cursive;
+.bubbles {
+  background-image: url("https://media.giphy.com/media/TfRM2BSvUJKigGOeYt/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: none;
 }
 
 .wood-plank {
@@ -203,24 +173,44 @@ div.scroll-text-two h2 {
 }
 
 
+button {
+  padding: 10px;
+  margin: 10px;
+}
+
+.try-again-button {
+  display: none;
+  padding: 10px;
+  margin: 10px;
+  font-family: 'Nerko One', cursive;
+  font-size: 15px;
+}
+
+.show-button {
+  background-color: turquoise;
+  border: 2px white solid;
+  color: white;
+  display: inline;
+  padding: 10px;
+  margin: 10px;
+  font-family: 'Nerko One', cursive;
+}
+
 
 /* Grid */
 
 .grid-wrapper {
   display: flex;
-  /* height: 100vh; */
   justify-content: center;
   align-items: center; 
   margin-bottom: 40px;
 }
 
 .grid {
-  align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  /* height: 80%; */
   justify-content: center;
+  align-items: center;
   height: 585x;
   width: 585px;
   background-color: white;
@@ -238,7 +228,6 @@ div.scroll-text-two h2 {
 
 
 .grid div.ariel {
-  /* background-image: url("https://media.giphy.com/media/3o7bu4Im1lrVauspBC/giphy.gif"); */
   background-image: url('../assets/ariel.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -287,6 +276,8 @@ footer {
   font-family: 'Nerko One', cursive;
   font-size: 20px;
 }
+
+/* Media Queries */
 
 @media only screen and (max-width: 880px) {
   main {
