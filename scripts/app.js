@@ -1,15 +1,5 @@
 function init() {
 
-  //** To Do
-  // Start Button Should start the game
-  // Add Grid with walls, shells, etc
-  // Add Ariel to the Board in specific starting position
-  // Make sure Ariel stays on board and cant move into walls, can move up down left and right
-  // Add Urusula to the board in specific position (add other ghosts later)
-  // Ghosts move in random direction (add random direction towards Ariel later on)
-  
-  
-
   //* Elements:
 
   // Grid
@@ -71,16 +61,12 @@ function init() {
   let arielPosition = 84
 
   let ghosts = [
-    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 300 },
-    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 400 },
-    { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 600 },
+    { name: 'ghostOne', startPosition: 14, currentPosition: 14, timerId: 0, timeInterval: 200 },
+    { name: 'ghostTwo', startPosition: 24, currentPosition: 24, timerId: 0, timeInterval: 300 },
+    { name: 'ghostThree', startPosition: 144, currentPosition: 144, timerId: 0, timeInterval: 400 },
     { name: 'ghostFour', startPosition: 154, currentPosition: 154, timerId: 0, timeInterval: 500 }
   ]
     
-  
-
-
-
   //* Functions
 
   //* Create A Grid
@@ -142,7 +128,7 @@ function init() {
   // Items: 
 
 
-  //* Remove Item
+  //* Remove Item from Grid 
 
   function removeItem(position) {
     updateScore()
@@ -154,7 +140,7 @@ function init() {
     }  
   }
 
-  //* Has shell or starfish function
+  //* Function to check whether grid contains starfish or shell
 
   function hasShell(position) {
     return cells[position].classList.contains(shellClass)
@@ -163,7 +149,6 @@ function init() {
   function hasStarfish(position) {
     return cells[position].classList.contains(starfishClass)
   }
-
 
 
   //* Characters
@@ -238,7 +223,7 @@ function init() {
   }
 
 
-  //* Function to Randomise Movement 
+  //* Function to Work out Random Movement 
 
   function randomMovement() {
     const randomIndex = Math.floor(Math.random() * movements.length)
@@ -246,7 +231,7 @@ function init() {
   }
   
 
-  //* Move Ursula Around Board
+  //* Move Ghosts Around Board
   
 
   const movements = ['right', 'left', 'up', 'down']
@@ -304,11 +289,13 @@ function init() {
   }
 
 
-  //*   Find coordinates of ghost new position
+  //*   Find coordinates of characters
   
   function findCoordinates(index) {
     return [index % width, Math.floor(index / width)]
   }
+
+  //*   Compare Coordinates to determine new ghost movement
 
   function compareCoordinates(index, newMovement) {
     const [currentGhostX, currentGhostY] = findCoordinates(ghosts[index].currentPosition)
@@ -349,17 +336,6 @@ function init() {
   arielCaught(2)
   arielCaught(3)
 
-  // when ariel eats starfish - ghost movement stop in that position // or move them back to the corner 
-
-  // function eatStarfish() {
-  //     ghosts[0].currentPosition = 88
-  //     ghosts[1].currentPosition = 88
-  //     ghosts[2].currentPosition = 88
-  //     ghosts[3].currentPosition = 88
-  //   }
-  
-
-  
 
   // Start, End and Scoring
 
@@ -444,7 +420,7 @@ function init() {
   }
 
   
-  //* Reset Game
+  //* Reset Game Functions
 
   function handleReset() {
     window.location.reload()
