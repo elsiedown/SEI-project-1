@@ -14,7 +14,10 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const startAudio = document.querySelector('#start-audio')
-
+  const ursulaSound = new Audio('assets/ursula-sound.mp3')
+  const timesUpSound = new Audio('assets/times-up.mp3')
+  const winnerSound = new Audio('assets/kiddo-we-did-it.mp3')
+  
 
   const playMusicButton = document.querySelector('.sebastian-button')
   const resetButton = document.querySelector('.reset-button')
@@ -32,7 +35,7 @@ function init() {
   // const timerSecondsDisplay = document.querySelector('#seconds')
   // const timerMinutesDisplay = document.querySelector('#minutes')
 
-  const ursulaSound = new Audio('../assets/ursula-sound.mp3')
+  
 
 
   const arielClass = 'ariel'
@@ -385,11 +388,12 @@ function init() {
       countSeconds = countSeconds - 1
       timerDisplay.innerHTML = countSeconds
       if (countSeconds < 1 ){ 
+        endOfGame()
+        timesUpSound.play()
         timerDisplay.innerHTML = 'Times Up'
         yourScore.innerHTML = `Game Over! You Ran Out Of Time! You Scored ${score}`
         tryAgainText.innerHTML = 'Try Again'
         tryAgainButton.classList.add('show-button')
-        endOfGame()
         return
       } 
     }, 1000)
@@ -406,6 +410,7 @@ function init() {
       scoreDisplay.innerHTML = score
     } if (scoreDisplay.innerHTML >= 1700) {
       endOfGame()
+      winnerSound.play()
       yourScore.innerHTML = `You Won! You Collected all the Shells! You Scored ${score}`
       tryAgainText.innerHTML = 'Have Another Go'
       tryAgainButton.classList.add('show-button')
