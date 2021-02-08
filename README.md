@@ -1,8 +1,5 @@
-# ReadMe Project 1 - Little Mermaid Pacman
-#readme
+# General Assembly SEI Project 1: Simple Front-End Game
 
-SEI - Project 1*
-General Assembly Project 1: Simple Front-End Game*
 **Project 1: Little Mermaid Pacman**
 
 You can find a hosted version of my game here : [Little Mermaid Pacman](https://elsiedown.github.io/SEI-project-1/)
