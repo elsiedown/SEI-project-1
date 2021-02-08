@@ -1,10 +1,10 @@
 # General Assembly SEI Project 1: Simple Front-End Game
 
-##Project 1: Little Mermaid Pacman
+## Project 1: Little Mermaid Pacman
 
 You can find a hosted version of my game here : [Little Mermaid Pacman](https://elsiedown.github.io/SEI-project-1/)
 
-##Overview
+## Overview
 
 This was my first project on the General Assembly Software Engineering Immersive course.  After three weeks of learning, we were assigned a week-long individual project with the goal of building a single page game using JavaScript, HTML and CSS. 
 
@@ -13,7 +13,7 @@ I decided to choose the classic arcade game PacMan,  adding a personal twist by 
 This Readme will outline the approach I took and the wins and challenges that I encountered along the way.
 
 
-##Brief
+## Brief
 * Render a game in the browser
 * Design logic for winning & visuals display which player won
 * Include separate HTML / CSS / JavaScript files
@@ -27,7 +27,7 @@ This Readme will outline the approach I took and the wins and challenges that I 
 * Create 4 ghosts + create effective logic for the ghosts
 
 
-##Timeframe and Technologies Used
+## Timeframe and Technologies Used
 
 **7 days**
 
@@ -46,21 +46,21 @@ This Readme will outline the approach I took and the wins and challenges that I 
 * Google Fonts
 * GitHub
 
-##Features and Pages
+## Features and Pages
 * Single Page Game
 * Score Board with Time and Lives
 * Timers
 * Restart Button
 * Audio
 
-##Game Instructions
+## Game Instructions
 1. The player (Ariel) has 60 seconds to clear the board, collecting all the shells before the time runs out and without being caught by the ghosts (Ursula).  For each shell collected, the player gets 20 points and 50 points for the starfishes.
 2. To escape Ursula , Ariel can use the whirlpool warp holes to move from one side of the board to the other.
 3. If Ursula catches Ariel, Ariel goes back to the beginning of the board and loses one life.
 4. If all lives are lost or the time runs out, the game is over. The player can then play again. 
 5. The score board displays the result and points scored at the end of the game.
 
-##Approach Taken
+## Approach Taken
 
 This sections sets out the approach that I took and the problems which I encountered.
 
@@ -74,19 +74,19 @@ The final challenge was to generate an ‘intelligent’ ghost movement - where 
 
 After I was happy that I had achieved the above functionality, I moved onto styling my game.  I added instructions and score boards, as well as buttons for the start and reset buttons. I then added in GIFS and affects (such as bubbles) for when the game was in play. The final thing I focussed on was the audio . I used 5 different audio clips from the Little Mermaid for the following parts of the game - general soundtrack, ‘lost life’ sound, game over sound, times over sound and winner sound.
 
-##Screen Shots
+## Screen Shots
 
-##Challenges
+## Challenges
 
 The main challenge for me was coming up with the ghost logic and applying the logic to multiple ghosts. This included refactoring my code and adding in an object of ghosts which then sped up the process and made life a lot easier. I also found the timers slightly difficult to get my head around but was happy that they all seemed to be working by the end. 
 
 Bugs - Ursula movement  double up  go on top of each other
 
-##Key Takeaways
+## Key Takeaways
 
 As this was my first ever project using JavaScript, I was really happy with the final product. I also really enjoyed playing with CSS (something I was nervous about when starting the project) and felt the game looked fun and interesting. I was really happy with the layout of my code and think it is pretty concise and readable. I was also happy with the different audio files that I used - I found them on a movie sound database and I think they work well (music whilst the game is in play / lost a life / game over / times up )
 
-##Future Features
+## Future Features
 
 My main improvement would be to work on the Ghost Logic - I feel they could probably track Pacman in a more accurate way (but felt the difficult level was appropriate for a child). I would have liked to add the functionality which enabled Pacman to eat food that would make the ghost run away.
 
