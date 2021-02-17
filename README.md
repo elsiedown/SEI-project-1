@@ -60,15 +60,15 @@ This Readme will outline the approach I took and the wins and challenges that I 
 
 ## Approach Taken
 
-This sections sets out the approach that I took and the problems which I encountered.
+* This section sets out the approach that I took and the problems which I encountered.
 
-I started by  mounting the grid, using JavaScript. I chose a 13x13 grid and applied different classes to the grid eg. For the walls, shells, whirlpools etc. 
+* I started by  mounting the grid, using JavaScript. I chose a 13x13 grid and applied different classes to the grid eg. For the walls, shells, whirlpools etc. 
 
-I then focused on the movement of Pacman, responding to the different arrow keys using a switch statement to make sure the player stayed within the grid and could move up, down, left and right.  The challenge I faced at this point was not only ensuring  that Pacman stayed on the board, but that the Pacman stayed within the maze grid and didn’t go ‘under’ the walls of the maze.
+* I then focused on the movement of Pacman, responding to the different arrow keys using a switch statement to make sure the player stayed within the grid and could move up, down, left and right.  The challenge I faced at this point was not only ensuring  that Pacman stayed on the board, but that the Pacman stayed within the maze grid and didn’t go ‘under’ the walls of the maze.
 
-I then worked on the ghost movement. At first, I aimed to generate a completely random movement for just one of the ghosts. Similar to Pacman, I used a switch statement to ensure the ghost stayed on the grid and within the maze path. Once I was happy with the random movement I decided to add the other ghosts. The easiest way to do this was by creating an array of objects of ghosts,  with different speeds, starting positions and timer IDs.  This took quite a while to put in place but then meant the function was reusable, passing in the different ghost indexes and resulting in the ghosts being added to the grid. 
+* I then worked on the ghost movement. At first, I aimed to generate a completely random movement for just one of the ghosts. Similar to Pacman, I used a switch statement to ensure the ghost stayed on the grid and within the maze path. Once I was happy with the random movement I decided to add the other ghosts. The easiest way to do this was by creating an array of objects of ghosts,  with different speeds, starting positions and timer IDs.  This took quite a while to put in place but then meant the function was reusable, passing in the different ghost indexes and resulting in the ghosts being added to the grid. 
 
-The final step was to generate an ‘intelligent’ ghost movement - where the ghosts were tracking Pacman. I did this by working out the current and new coordinates of the ghosts, as well as the current coordinates of Pacman and then compared the three coordinates.  I worked out that if the (Pac-Man coordinates - new ghost position coordinates) is smaller than (Pac-Man coordinates - current ghost position) then the ghost could move into the new position. Similarly, if the result of first calculation was greater than the second calculation, then the ghost should choose a different direction.
+* The final step was to generate an ‘intelligent’ ghost movement - where the ghosts were tracking Pacman. I did this by working out the current and new coordinates of the ghosts, as well as the current coordinates of Pacman and then compared the three coordinates.  I worked out that if the (Pac-Man coordinates - new ghost position coordinates) is smaller than (Pac-Man coordinates - current ghost position) then the ghost could move into the new position. Similarly, if the result of first calculation was greater than the second calculation, then the ghost should choose a different direction.
 
 ```
   //*   Find coordinates of characters
@@ -92,11 +92,9 @@ The final step was to generate an ‘intelligent’ ghost movement - where the g
 
 ```
 
-After I was happy that I had achieved the above functionality, I moved onto styling my game.  I added in GIFS and effects (such as bubbles) for when the game was in play. The final thing I focussed on was the audio . I used 5 different audio clips from the Little Mermaid which I found on a movie sound database and I think they worked well -  there are audio effects for when the game is in play, when the player loses a life, and for all three different outcomes of the game - the player has won, the player has no lives left, and the player has run out of lives.
+* After I was happy that I had achieved the above functionality, I moved onto styling my game.  I added in GIFS and effects (such as bubbles) for when the game was in play. The final thing I focussed on was the audio . I used 5 different audio clips from the Little Mermaid which I found on a movie sound database and I think they worked well -  there are audio effects for when the game is in play, when the player loses a life, and for all three different outcomes of the game - the player has won, the player has no lives left, and the player has run out of lives.
 
-## Screen Shots
-
-**The Game**
+## The Game: 
 
 ![](/assets/images/screenshot-one.png)
 
@@ -112,16 +110,16 @@ After I was happy that I had achieved the above functionality, I moved onto styl
 
 ## Wins
 
-As this was my first ever project using JavaScript, I was really happy with the final product. I also really enjoyed using CSS (something I was nervous about when starting the project) and felt the game looked fun and interesting. I was really happy with the layout and readability of my code.
+* As this was my first ever project using JavaScript, I was really happy with the final product. I also really enjoyed using CSS (something I was nervous about when starting the project) and felt the game looked fun and interesting. I was really happy with the layout and readability of my code.
 
 ## Challenges
 
-The main challenge that I encountered was coming up with the ghost movement and logic - and then applying this logic to the multiple ghosts. To do this, I refactored my code by creating an array of objects of ghosts which enabled me to apply the same logic to the multiple ghosts. I found the timers slightly difficult to implement, and I encountered a few bugs where they were going at the wrong speeds but was happy that they all seemed to be working by the end. 
+* The main challenge that I encountered was coming up with the ghost movement and logic - and then applying this logic to the multiple ghosts. To do this, I refactored my code by creating an array of objects of ghosts which enabled me to apply the same logic to the multiple ghosts. I found the timers slightly difficult to implement, and I encountered a few bugs where they were going at the wrong speeds but was happy that they all seemed to be working by the end. 
 
 ## Future Features
 
-If I had more time, I would improve the ghost logic so that they would track Pacman in a more accurate way. I would have liked to add the functionality which enabled Pacman to eat food that would make the ghost run away.
+* If I had more time, I would improve the ghost logic so that they would track Pacman in a more accurate way. I would have liked to add the functionality which enabled Pacman to eat food that would make the ghost run away.
 
-I would also have liked to added more levels - possibly with a more complex maze or with different timers used to make the game more challenging.
+* I would also have liked to added more levels - possibly with a more complex maze or with different timers used to make the game more challenging.
 
-It would have also been nice to use local storage in order for there to be a high score board.
+* It would have also been nice to use local storage in order for there to be a high score board.
