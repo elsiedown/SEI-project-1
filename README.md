@@ -92,7 +92,7 @@ This Readme will outline the approach I took and the wins and challenges that I 
 
 ```
 
-* After I was happy that I had achieved the above functionality, I moved onto styling my game.  I added in GIFS and effects (such as bubbles) for when the game was in play. The final thing I focussed on was the audio . I used 5 different audio clips from the Little Mermaid which I found on a movie sound database and I think they worked well -  there are audio effects for when the game is in play, when the player loses a life, and for all three different outcomes of the game - the player has won, the player has no lives left, and the player has run out of lives.
+* After I was happy that I had achieved the above functionality, I moved onto styling my game.  I added in GIFS and effects (such as bubbles) for when the game was in play. The final thing I focussed on was the audio . I used 5 different audio clips from the Little Mermaid which I found on a movie sound database and I think they worked well -  there are audio effects for when the game is in play, when the player loses a life, and for all three different outcomes of the game - the player has won, the player has no lives left, and the player has run out of time.
 
 ## The Game: 
 
