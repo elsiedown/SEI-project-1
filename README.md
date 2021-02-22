@@ -116,6 +116,11 @@ This Readme will outline the approach I took and the wins and challenges that I 
 
 * The main challenge that I encountered was coming up with the ghost movement and logic - and then applying this logic to the multiple ghosts. To do this, I refactored my code by creating an array of objects of ghosts which enabled me to apply the same logic to the multiple ghosts. I found the timers slightly difficult to implement, and I encountered a few bugs where they were going at the wrong speeds but was happy that they all seemed to be working by the end. 
 
+## What I learned
+
+* It was great to put into practice and consolidate everything that I had been learning for the first three weeks of the course. 
+* I learned a huge amount about project management and time management - especially how to plan effectively in order to hit key targets over the week and reach MVP on time.
+
 ## Future Features
 
 * If I had more time, I would improve the ghost logic so that they would track Pacman in a more accurate way. I would have liked to add the functionality which enabled Pacman to eat food that would make the ghost run away.
